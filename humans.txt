@@ -1,0 +1,15 @@
+# humanstxt.org/
+# The humans responsible & technology colophon
+
+# TEAM
+Simon Lepel
+Site: https://simbo.codes/
+Twitter: simbo23
+GitHub: simbo
+Location: Berlin, Germany
+
+# SITE
+Standards: HTML5, CSS3, ECMAScript
+Components: Vue, css-reset-and-normalize, typed.js, shortid
+Software: Node.js, Pug, SCSS, Typescript, Parcel, PostCSS, Autoprefixer,
+  cssnano, css-mqpacker

@@ -2,49 +2,43 @@ name: CI
 
 on:
   push:
-    branches: [master]
+    tags:
+      - v*
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: write
 
 jobs:
   build:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
 
     steps:
-      - name: 🛎  Checkout
-        uses: actions/checkout@v2
+      - name: 🛎 Checkout
+        uses: actions/checkout@v4
 
-      - name: 📄  Read .nvmrc
-        run: echo "::set-output name=NVMRC::$(cat .nvmrc)"
-        id: nvm
-
-      - name: 🛠  Setup node.js
-        uses: actions/setup-node@v2.1.2
+      - name: 🛠 Setup node.js
+        uses: actions/setup-node@v4
         with:
-          node-version: '${{ steps.nvm.outputs.NVMRC }}'
+          node-version-file: '.nvmrc'
 
-      - name: 📦  Install
-        run: |
-          yarn install --frozen-lockfile
-          npx --yes browserslist@latest --update-db
+      - name: 📦 Install
+        run: npm ci
 
-      # - name: 🕵️  Lint
-      #   run: yarn lint
+      - name: 🕵️ Lint
+        run: npm run lint
 
-      # - name: 🧪  Test
-      #   run: yarn test
+      - name: 🧑‍🏫 Check Format
+        run: npm run format
 
-      - name: 👷‍♂️  Build
-        run: |
-          yarn run build
+      - name: 👷‍♂️ Build
+        run: yarn run build
 
-      - name: 🔑  Prepare SSH Client
-        uses: webfactory/ssh-agent@v0.4.1
+      - name: 🚚 Deploy
+        if: ${{ github.event_name == 'push' }}
+        uses: JamesIves/github-pages-deploy-action@v4
         with:
-          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-
-      - name: 🚚  Deploy
-        uses: JamesIves/github-pages-deploy-action@3.7.1
-        with:
-          SSH: true
-          REPOSITORY_NAME: simbo/simbo.github.io
-          BRANCH: gh-pages
-          FOLDER: dist
+          folder: dist
+          commit-message: Release ${{ github.ref_name }} from main @ ${{ github.sha }}

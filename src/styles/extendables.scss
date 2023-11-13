@@ -1,0 +1,70 @@
+%reset {
+  margin: 0;
+  padding: 0;
+  line-height: inherit;
+  color: inherit;
+  text-align: inherit;
+  font-family: inherit;
+  font-size: 100%;
+}
+
+%button-reset {
+  @extend %reset;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  appearance: button;
+  -webkit-appearance: button;
+  user-select: none;
+  cursor: pointer;
+
+  &:-moz-focusring {
+    outline: none;
+  }
+
+  &:focus {
+    outline: none;
+  }
+}
+
+%font--sans {
+  font-family: $font--sans;
+}
+
+%font--mono {
+  font-family: $font--mono;
+}
+
+%flex--center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+%material-shadow--1 {
+  box-shadow: $material-shadow--1;
+}
+%material-shadow--2 {
+  box-shadow: $material-shadow--2;
+}
+%material-shadow--3 {
+  box-shadow: $material-shadow--3;
+}
+%material-shadow--4 {
+  box-shadow: $material-shadow--4;
+}
+%material-shadow--5 {
+  box-shadow: $material-shadow--5;
+}
+
+%visually-hidden {
+  clip: rect(1px, 1px, 1px, 1px);
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+  margin: -1px;
+}

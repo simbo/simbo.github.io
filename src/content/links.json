@@ -1,0 +1,32 @@
+[
+  {
+    "href": "mailto:simbo@simbo.de",
+    "type": "E-Mail",
+    "label": "simbo@simbo.de"
+  },
+  {
+    "href": "/simbo-pubkey.asc",
+    "type": "GPG Key",
+    "label": "7AAD1A8E"
+  },
+  {
+    "href": "https://github.com/simbo",
+    "type": "GitHub",
+    "label": "simbo"
+  },
+  {
+    "href": "https://www.npmjs.com/~simbo",
+    "type": "npm",
+    "label": "simbo"
+  },
+  {
+    "href": "https://bsky.app/profile/simbo23.bsky.social",
+    "type": "BlueSky",
+    "label": "@simbo23.bsky.social"
+  },
+  {
+    "href": "https://twitter.com/simbo23",
+    "type": "Twitter/X",
+    "label": "@simbo23"
+  }
+]

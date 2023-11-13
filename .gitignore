@@ -1,9 +1,11 @@
-node_modules
-*.log
-
+/node_modules
 /dist
-/bundle-analyzer-report.*
-/.cache
+/.parcel-cache
+
+*.log
+npm-debug.log*
 
 /.vscode/*
 !/.vscode/settings.json
+
+.DS_Store

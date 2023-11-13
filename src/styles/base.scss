@@ -1,0 +1,42 @@
+* {
+  &,
+  &::before,
+  &::after {
+    box-sizing: inherit;
+  }
+}
+
+html {
+  @extend %reset, %font--sans;
+  box-sizing: border-box;
+  background: var(--background-color);
+  color: var(--primary-color);
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+
+  font-size: 16px;
+  font-weight: 400;
+  line-height: $line-height;
+
+  @media screen and (min-width: 1280px) {
+    font-size: 18px;
+  }
+
+  @media screen and (min-width: 1660px) {
+    font-size: 20px;
+  }
+}
+
+body {
+  @extend %reset;
+  min-height: 100vh;
+}
+
+a {
+  color: var(--link-color);
+  text-decoration: underline;
+}

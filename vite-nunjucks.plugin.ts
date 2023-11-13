@@ -9,7 +9,7 @@ export interface NunjucksPluginOptions {
   locals: object; // nunjucks template variables
 }
 
-const srcPath = resolve(cwd(), 'src');
+const sourceBasePath = resolve(cwd(), 'src');
 
 const nunjucksOptions: ConfigureOptions = {
   autoescape: true,
@@ -23,7 +23,7 @@ const nunjucksEnvironment = new Environment(
   {
     async: true,
     getSource: (name, callback) => {
-      const path = resolve(srcPath, name);
+      const path = resolve(sourceBasePath, name);
       readFile(path)
         .then(src => callback(undefined, { src: src.toString(), path, noCache: !!nunjucksOptions.noCache }))
         .catch(error => (callback as (error: Error) => void)(error));
@@ -39,7 +39,7 @@ export default (options: Partial<NunjucksPluginOptions> = {}): Plugin => {
     enforce: 'pre',
     handleHotUpdate: (context: HmrContext): void | [] => {
       const filename = resolve(context.file);
-      if (!filename.startsWith(srcPath)) return;
+      if (!filename.startsWith(sourceBasePath)) return;
       context.server.ws.send({ type: 'full-reload' });
       return [];
     },

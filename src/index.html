@@ -1,4 +1,4 @@
-{% extends "./layouts/global.html" %} {% block head %} {{ super() }}
+{% extends "layouts/global.html" %} {% block head %} {{ super() }}
 
 <script type="module" src="./index.ts"></script>
 
@@ -11,23 +11,41 @@
 
 <main class="main">
   <div class="content">
-    <typed-text
-      ><span code="1250"></span><strong>Hello World!</strong><span code="1000"></span><br />
-      <span code="250"></span><br />
-      <span code="250"></span>You just stumbled across my website.<span code="750"></span> You are so awesome.
-      <span code="500"></span>.<span code="500"></span>.<span code="750"></span><br />
-      <span code="250"></span><br />
-      <span code="250"></span>There is not much to see here<span code="750"></span> but you can <span code="250"></span
-      ><button>get in touch with me</button><span code="750"></span>, if you feel like you have to.
-      <span code="500"></span> :)<span code="750"></span><br />
-      <span code="250"></span><br />
-      <span code="750"></span>Simon Lepel <span code="500"></span>~ <span code="500"></span>simbo<br />
-      <span code="stop"></span><br />
-      <span code="400"></span>
-      {% for link in LINKS %} - <span code="400"></span
-      ><a href="{{ link.href }}" target="_blank" class="link"
-        > <span class="link__type">{{ link.type }}</span> <span class="link__label">{{ link.label }}</span></a
-      ><br /><br />{% endfor %}
+    <!-- prettier-ignore -->
+    <typed-text>
+      <div class="intro">
+        <span code="1250"></span><strong>Hello World!</strong>
+        <span code="1000"></span><br />
+        <span code="250"></span><br />
+        <span code="250"></span>You just stumbled across my website.
+        <span code="750"></span> You are so awesome.
+        <span code="500"></span>.
+        <span code="500"></span>.
+        <span code="750"></span><br />
+        <span code="250"></span><br />
+        <span code="250"></span>There is not much to see here
+        <span code="750"></span> but you can <span code="250"></span>
+        <button>get in touch with me</button>
+        <span code="750"></span>, if you feel like you have to.
+        <span code="500"></span> :)
+        <span code="750"></span><br />
+        <span code="250"></span><br />
+        <span code="750"></span>Simon Lepel
+        <span code="500"></span> ~
+        <span code="500"></span> simbo
+        <span code="250"></span><br />
+        <span code="stop"></span><br />
+      </div>
+      <div class="links">
+        <span code="400"></span>
+        {% for link in LINKS %} - <span code="400"></span>
+          <a href="{{ link.href }}" target="_blank" class="link">
+            <span class="link__type">{{ link.type }}</span> 
+            <span class="link__label">{{ link.label }}</span>
+          </a>
+          <br /><br />
+        {% endfor %}
+      </div>
     </typed-text>
   </div>
 </main>

@@ -36,6 +36,13 @@ body {
   max-width: 100%;
 }
 
+typed-text {
+  .intro,
+  .links {
+    display: inline;
+  }
+}
+
 .footer {
   padding: 1rem;
   font-size: $font-size--small;

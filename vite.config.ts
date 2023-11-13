@@ -47,7 +47,8 @@ export default defineConfig(async ({ command }) => {
             options: {
               collapseWhitespace: true,
               conservativeCollapse: true,
-              preserveLineBreaks: true
+              preserveLineBreaks: true,
+              removeComments: true
             }
           }) as unknown as Plugin
         ]

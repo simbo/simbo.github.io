@@ -14,7 +14,7 @@ This is my personal website.
   <a href="https://simbo.codes/" target="_blank"><img src="readme-button.svg" style="width: 100%;" alt="OWCC Documentation"></a>
 </div>
 
-See generated contents in the
+See generated contents at the
 [`gh-pages`](https://github.com/simbo/simbo.github.io/tree/gh-pages) branch.
 
 ## License and Author

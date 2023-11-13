@@ -7,7 +7,6 @@ import { defineConfig, Plugin, splitVendorChunkPlugin, UserConfig } from 'vite';
 import svgLoader from 'vite-svg-loader';
 
 import packageJson from './package.json';
-import footerLinks from './src/content/footer-links.json';
 import links from './src/content/links.json';
 import nunjucksPlugin from './vite-nunjucks.plugin';
 
@@ -60,7 +59,7 @@ export default defineConfig(async ({ command }) => {
         defaultImport: 'raw',
         svgo: false
       }),
-      nunjucksPlugin({ locals: { ...globals, LINKS: links, FOOTER_LINKS: footerLinks } }),
+      nunjucksPlugin({ locals: { ...globals, LINKS: links } }),
       splitVendorChunkPlugin()
     ],
 

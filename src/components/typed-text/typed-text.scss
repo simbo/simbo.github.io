@@ -55,7 +55,6 @@ typed-text {
   }
 
   button {
-    @extend %button-reset;
     color: var(--highlight-color);
     cursor: progress;
   }

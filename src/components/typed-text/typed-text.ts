@@ -20,20 +20,20 @@ export class TypedText extends HTMLElement {
   private nextStep = 0;
 
   // base pause duration between each typed character
-  private readonly typeDelay: number;
+  private typeDelay!: number;
 
   // timeout reference for pause timeout
   private typeTimeout = 0;
 
   public constructor() {
     super();
+  }
+
+  public connectedCallback(): void {
     this.typeDelay = Number.parseInt(this.getAttribute('type-delay') || '0', 10) || DEFAULT_TYPE_DELAY;
     const content = this.innerHTML;
     this.innerHTML = '';
     this.queueContent(content);
-  }
-
-  public connectedCallback(): void {
     this.startTyping();
   }
 

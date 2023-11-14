@@ -1,0 +1,73 @@
+{% extends "layouts/global.html" %} {% block head %} {{ super() }}
+
+<script type="module" src="./index.ts"></script>
+
+{% endblock %} {% block body %}
+
+<header class="header">
+  <h1>Simon Lepel</h1>
+  <p>Personal website of <strong>Simon Lepel</strong> alias <strong>Simbo</strong>.</p>
+</header>
+
+<main class="main">
+  <div class="content">
+    <!-- prettier-ignore -->
+    <typed-text>
+      <div class="intro">
+        <span code="1250"></span><strong>Hello World!</strong>
+        <span code="1000"></span><br />
+        <span code="250"></span><br />
+        <span code="250"></span>You just stumbled across my website.
+        <span code="750"></span> You are so awesome.
+        <span code="500"></span>.
+        <span code="500"></span>.
+        <span code="750"></span><br />
+        <span code="250"></span><br />
+        <span code="250"></span>There is not much to see here
+        <span code="750"></span> but you can <span code="250"></span>
+        <button>get in touch with me</button>
+        <span code="750"></span>, if you feel like you have to.
+        <span code="500"></span> :)
+        <span code="750"></span><br />
+        <span code="250"></span><br />
+        <span code="750"></span>Simon Lepel
+        <span code="500"></span> ~
+        <span code="500"></span> simbo
+        <span code="250"></span><br />
+        <span code="stop"></span><br />
+      </div>
+      <div class="links">
+        <span code="400"></span>
+        {% for link in LINKS %} - <span code="400"></span>
+          <a href="{{ link.href }}" target="_blank" class="link">
+            <span class="link__type">{{ link.type }}</span> 
+            <span class="link__label">{{ link.label }}</span>
+          </a>
+          <br /><br />
+        {% endfor %}
+      </div>
+    </typed-text>
+  </div>
+</main>
+
+<footer class="footer">
+  <ul class="footer-list">
+    <li class="footer-list__item">
+      <a class="footer-link" href="https://github.com/simbo/simbo.github.io/" target="_blank"
+        ><svg-icon class="footer-link__icon" icon-name="github"></svg-icon
+        ><span class="footer-link__label"
+          >simbo.github.io <span title="Last Build: {{ SITE_LAST_BUILD }}">v{{ SITE_VERSION }}</span></span
+        ></a
+      >
+    </li>
+    <li class="footer-list__item">
+      <a class="footer-link" href="https://simbo.mit-license.org/" target="_blank"
+        ><span class="footer-link__label">MIT © 2018 Simon Lepel</span></a
+      >
+    </li>
+  </ul>
+</footer>
+
+<color-theme-toggle></color-theme-toggle>
+
+{% endblock %}

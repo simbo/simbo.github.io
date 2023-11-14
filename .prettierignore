@@ -1,2 +1,2 @@
-/src/styles/imports/vars.scss
-/import-sorter.json
+/node_modules
+/dist

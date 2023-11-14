@@ -1,0 +1,16 @@
+# humanstxt.org/
+# The humans responsible & technology colophon
+
+# TEAM
+Simon Lepel
+Site: https://simbo.codes/
+GitHub: simbo
+npm: simbo
+BlueSky: @simbo23.bsky.social
+Twitter: @simbo23
+Location: Germany
+
+# SITE
+Standards: HTML5, CSS3, ES2022
+Components: none
+Software: Node.js, Vite, Typescript, SASS, Nunjucks

@@ -1,63 +1,51 @@
 {
-  "name": "simbo.github.io_source",
+  "name": "simbo.github.io",
   "version": "2.1.2",
-  "description": "My personal GitHub pages.",
+  "description": "My personal website.",
   "author": "Simon Lepel <simbo@simbo.de> (https://simbo.de/)",
   "license": "MIT",
-  "private": true,
-  "repository": "github:simbo/simbo.github.io_source",
   "homepage": "https://simbo.codes/",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/simbo/simbo.github.io.git"
+  },
+  "bugs": {
+    "url": "https://github.com/simbo/simbo.github.io/issues"
+  },
+  "private": true,
+  "type": "module",
   "scripts": {
-    "build": "parcel build src/*.pug",
-    "start": "parcel src/*.pug",
-    "serve": "yarn build && webserver 1234 dist",
-    "test": "echo \"No tests specified. Skipping...\" && exit 0",
-    "upgrade": "npx --yes npm-check-updates -u -t minor && npx --yes npm-check-updates --interactive --reject typescript,@types/node && yarn install"
-  },
-  "engines": {
-    "node": ">=18"
-  },
-  "parcelCleanPaths": [
-    ".cache",
-    "dist"
-  ],
-  "staticFiles": {
-    "staticPath": "src/static",
-    "watcherGlob": "**"
-  },
-  "alias": {
-    "vue": "./node_modules/vue/dist/vue.common.js"
-  },
-  "dependencies": {
-    "css-reset-and-normalize": "^2.3.2",
-    "shortid": "^2.2.16",
-    "typed.js": "^2.0.11",
-    "vue": "^2.6.12"
+    "browserslist": "browserslist",
+    "build": "tsc && vite build",
+    "bundle-analyzer": "npx --yes vite-bundle-visualizer",
+    "dev": "vite --no-clear-screen",
+    "format:fix": "prettier --write .",
+    "format": "prettier --check .",
+    "lint:fix": "eslint -c .eslintrc.json --fix .",
+    "lint": "eslint -c .eslintrc.json .",
+    "postinstall": "npx --yes update-browserslist-db@latest",
+    "preflight": "npm run lint && npm run format && npm run build",
+    "preview": "vite preview",
+    "start": "npm run dev",
+    "upgrade": "npx --yes npm-check-updates -u -t minor && npx --yes npm-check-updates --interactive --reject typescript,@types/node && npm i"
   },
   "devDependencies": {
-    "@babel/core": "^7.23.2",
-    "@opentelemetry/api": "^1.1.0",
-    "@types/node": "^14.14.10",
-    "@types/shortid": "^0.0.29",
-    "@types/typed.js": "^2.0.9",
-    "@vue/component-compiler-utils": "^3.2.0",
-    "autoprefixer": "^9.8.6",
-    "css-mqpacker": "^7.0.0",
-    "css-mqpacker-sort-mediaqueries": "^0.2.2",
-    "cssnano": "^4.1.10",
-    "next": "^14.0.1",
-    "parcel-bundler": "^1.12.4",
-    "parcel-plugin-clean-easy": "^1.0.2",
-    "parcel-plugin-package-version": "^1.0.2",
-    "parcel-plugin-static-files-copy": "^2.5.0",
-    "postcss": "^7.0.35",
-    "pug": "^3.0.0",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "sass": "^1.3.0",
-    "typescript": "^4.1.2",
-    "vue-hot-reload-api": "^2.3.4",
-    "vue-template-compiler": "^2.6.12",
-    "webserver": "^4.0.2"
+    "@ianvs/prettier-plugin-sort-imports": "^4.1.1",
+    "@types/node": "^18.18.9",
+    "@types/nunjucks": "^3.2.6",
+    "@typescript-eslint/eslint-plugin": "^6.10.0",
+    "@typescript-eslint/parser": "^6.10.0",
+    "autoprefixer": "^10.4.16",
+    "cssnano": "^6.0.1",
+    "eslint": "^8.53.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-unicorn": "^49.0.0",
+    "nunjucks": "^3.2.4",
+    "prettier": "^3.1.0",
+    "rollup-plugin-html-minifier": "^2.0.0",
+    "sass": "^1.69.5",
+    "typescript": "^5.2.2",
+    "vite": "^4.5.0",
+    "vite-svg-loader": "^4.0.0"
   }
 }

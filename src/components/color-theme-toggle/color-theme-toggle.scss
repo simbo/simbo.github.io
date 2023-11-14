@@ -1,0 +1,13 @@
+color-theme-toggle {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  line-height: 1;
+
+  button {
+    color: var(--secondary-color);
+    &:hover {
+      color: inherit;
+    }
+  }
+}

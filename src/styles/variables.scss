@@ -1,0 +1,26 @@
+@use 'sass:math';
+
+@function remPx($value) {
+  @return $value * 1rem * math.div(1, 16);
+}
+
+$font--sans: -apple-system, 'system-ui', 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif, 'Apple Color Emoji',
+  'Segoe UI Emoji';
+$font--mono: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace;
+
+$line-height: 1.4285714286;
+$font-size--small: 0.75em;
+
+$material-shadow--1: 0 #{remPx(1)} #{remPx(4)} 0 rgba(0, 0, 0, 0.37);
+$material-shadow--2:
+  0 #{remPx(2)} #{remPx(2)} 0 rgba(0, 0, 0, 0.2),
+  0 #{remPx(6)} #{remPx(10)} 0 rgba(0, 0, 0, 0.3);
+$material-shadow--3:
+  0 #{remPx(11)} #{remPx(7)} 0 rgba(0, 0, 0, 0.19),
+  0 #{remPx(13)} #{remPx(25)} 0 rgba(0, 0, 0, 0.3);
+$material-shadow--4:
+  0 #{remPx(14)} #{remPx(12)} 0 rgba(0, 0, 0, 0.17),
+  0 #{remPx(20)} #{remPx(40)} 0 rgba(0, 0, 0, 0.3);
+$material-shadow--5:
+  0 #{remPx(17)} #{remPx(17)} 0 rgba(0, 0, 0, 0.15),
+  0 #{remPx(27)} #{remPx(55)} 0 rgba(0, 0, 0, 0.3);

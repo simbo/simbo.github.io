@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en" style="visibility: hidden">
+  <head>
+    {% block head %}
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Simbo's Website</title>
+    <meta name="description" content="Personal Website of Simon Lepel alias simbo" />
+    <meta name="author" content="Simon Lepel" />
+    <meta name="copyright" content="MIT © 2018 Simon Lepel" />
+    <meta name="robots" content="index, follow" />
+    <meta property="og:type" content="profile" />
+    <meta property="og:title" content="Simbo's Website" />
+    <meta property="og:url" content="https://simbo.codes/" />
+    <meta property="og:image" content="https://simbo.codes/screenshot.png" />
+    <meta property="og:description" content="Per" />
+    <meta property="profile:first_name" content="Simon" />
+    <meta property="profile:last_name" content="Lepel" />
+    <meta property="profile:username" content="simbo" />
+    <link rel="author" href="/humans.txt" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    {% if SITE_IS_PROD %}
+    <script async data-website-id="dc9bc9e9-563f-451b-82b9-2fe74412aa78" src="https://trk.simbo.de/script.js"></script>
+    {% endif %} {% endblock %}
+  </head>
+  <body onload="this.onload=null;document.documentElement.style.visibility='visible';">
+    {% block body %}{% endblock %}
+  </body>
+</html>

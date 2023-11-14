@@ -20,11 +20,11 @@
 
 :root {
   &,
-  &.color-theme--light {
+  &[data-color-theme='light'] {
     @extend %color-theme--light;
   }
 
-  &.color-theme--dark {
+  &[data-color-theme='dark'] {
     @extend %color-theme--dark;
   }
 }

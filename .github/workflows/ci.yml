@@ -2,6 +2,8 @@ name: CI
 
 on:
   push:
+    branches:
+      - main
     tags:
       - v*
   pull_request:
@@ -37,7 +39,7 @@ jobs:
         run: yarn run build
 
       - name: 🚚 Deploy
-        if: ${{ github.event_name == 'push' }}
+        if: ${{ github.event_name == 'push' && startsWith(github.event.ref, 'refs/tags/v') }}
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           folder: dist

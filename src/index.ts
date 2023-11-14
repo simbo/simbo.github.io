@@ -2,6 +2,9 @@ import './index.scss';
 import './components';
 
 import { STOPPED_TYPING_EVENT_NAME, TypedText } from './components/typed-text/typed-text';
+import { ColorTheme } from './lib/color-theme';
+
+ColorTheme.initialize();
 
 const INITIAL_CONTENT_CLASS = 'has-initial-content';
 const ADDITIONAL_CONTENT_CLASS = 'has-additional-content';
@@ -12,8 +15,6 @@ const onStopTyping = () => {
   typedText.removeEventListener(STOPPED_TYPING_EVENT_NAME, onStopTyping);
   typedText.classList.add(INITIAL_CONTENT_CLASS);
 };
-
-typedText.addEventListener(STOPPED_TYPING_EVENT_NAME, onStopTyping);
 
 const onClickLink = (event: Event) => {
   if ((event.target as HTMLElement).tagName === 'BUTTON') {
@@ -26,4 +27,5 @@ const onClickLink = (event: Event) => {
   }
 };
 
+typedText.addEventListener(STOPPED_TYPING_EVENT_NAME, onStopTyping);
 typedText.addEventListener('click', onClickLink);

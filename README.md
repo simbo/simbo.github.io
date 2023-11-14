@@ -1,4 +1,4 @@
-# simbo.github.io
+# simbo.codes (simbo.github.io)
 
 [![Uptime Ratio (last 30 days)](https://img.shields.io/uptimerobot/ratio/m777162478-e175ed9f7fd10f035bc5d20d)](https://simbo.codes/)
 [![Project Version](https://img.shields.io/github/package-json/version/simbo/simbo.github.io)](https://github.com/simbo/simbo.github.io/blob/main/package.json)
@@ -8,7 +8,7 @@
 
 ---
 
-This is my personal website.
+My personal website.
 
 <div style="width: 100%;">
   <a href="https://simbo.codes/" target="_blank"><img src="readme-button.svg" style="width: 100%;" alt="OWCC Documentation"></a>

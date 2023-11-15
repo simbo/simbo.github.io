@@ -6,6 +6,7 @@ export class ColorThemeToggle extends HTMLElement {
 
   public connectedCallback(): void {
     const button = document.createElement('button') as HTMLButtonElement;
+    button.setAttribute('title', 'Toggle Color Theme');
     button.addEventListener('click', (event: Event) => {
       event.preventDefault();
       ColorTheme.toggle();

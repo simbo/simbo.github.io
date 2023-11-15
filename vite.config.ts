@@ -14,6 +14,15 @@ interface Globals {
   [key: string]: string | boolean | number;
 }
 
+const AUTHOR_FIRST_NAME = 'Simon';
+const AUTHOR_LAST_NAME = 'Lepel';
+const AUTHOR_NAME = `${AUTHOR_FIRST_NAME} ${AUTHOR_LAST_NAME}`;
+const AUTHOR_USER = 'simbo';
+const SITE_TITLE = "Simbo's Website";
+const SITE_DESCRIPTION = `Personal Website of ${AUTHOR_NAME} alias ${AUTHOR_USER}`;
+const SITE_URL = 'https://simbo.codes/';
+const SITE_LICENSE = `MIT © 2018 ${AUTHOR_NAME}`;
+
 // https://vitejs.dev/config/
 export default defineConfig(async ({ command }) => {
   const mode = command === 'build' ? 'production' : 'development';
@@ -22,7 +31,15 @@ export default defineConfig(async ({ command }) => {
     SITE_VERSION: packageJson.version,
     SITE_LAST_BUILD: new Date().toUTCString(),
     SITE_IS_PROD: mode === 'production',
-    SITE_IS_DEV: mode === 'development'
+    SITE_IS_DEV: mode === 'development',
+    SITE_TITLE,
+    SITE_DESCRIPTION,
+    SITE_URL,
+    SITE_LICENSE,
+    AUTHOR_FIRST_NAME,
+    AUTHOR_LAST_NAME,
+    AUTHOR_NAME,
+    AUTHOR_USER
   };
 
   const config: UserConfig = {

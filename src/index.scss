@@ -45,9 +45,17 @@ typed-text {
 }
 
 .footer {
+  position: relative;
   padding: 1rem;
   font-size: $font-size--small;
   color: var(--secondary-color);
+
+  color-theme-toggle {
+    position: absolute;
+    bottom: 1rem;
+    right: 1rem;
+    font-size: 1.25rem;
+  }
 }
 
 .footer-list {

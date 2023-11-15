@@ -25,7 +25,7 @@
     <script async data-website-id="dc9bc9e9-563f-451b-82b9-2fe74412aa78" src="https://trk.simbo.de/script.js"></script>
     {% endif %} {% endblock %}
   </head>
-  <body onload="this.onload=null;document.documentElement.style.visibility='visible';">
+  <body onload="document.documentElement.removeAttribute('style');document.body.removeAttribute('onload');">
     {% block body %}{% endblock %}
   </body>
 </html>

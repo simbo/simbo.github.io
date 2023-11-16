@@ -4,32 +4,38 @@ export enum ColorThemeValue {
 }
 
 const DEFAULT_COLOR_THEME_VALUE = ColorThemeValue.Light;
+const COLOR_THEME_STORAGE_KEY = 'color-theme';
 
 function userPrefersColorScheme(scheme: 'light' | 'dark'): boolean {
   return window.matchMedia(`(prefers-color-scheme: ${scheme})`).matches;
 }
 
-function initialize(): ColorThemeValue {
+function initialize(): void {
+  const storedTheme = window.localStorage.getItem(COLOR_THEME_STORAGE_KEY);
   let theme: string | undefined;
-  if (userPrefersColorScheme(ColorThemeValue.Dark)) {
+  if (storedTheme) {
+    theme = storedTheme;
+  } else if (userPrefersColorScheme(ColorThemeValue.Dark)) {
     theme = ColorThemeValue.Dark;
   } else if (userPrefersColorScheme(ColorThemeValue.Light)) {
     theme = ColorThemeValue.Light;
-  }
-  return setTheme(theme);
-}
-
-function setTheme(theme?: string): ColorThemeValue {
-  const themeValues = Object.values(ColorThemeValue);
-  if (typeof theme !== 'string' || !themeValues.includes(theme as ColorThemeValue)) {
+  } else {
     theme = DEFAULT_COLOR_THEME_VALUE;
   }
-  document.documentElement.dataset.colorTheme = theme;
-  return theme as ColorThemeValue;
+  setTheme(theme);
 }
 
-function toggle(): ColorThemeValue {
-  return setTheme(
+function setTheme(theme?: string): void {
+  const themeValues = Object.values(ColorThemeValue);
+  if (!themeValues.includes(theme as ColorThemeValue)) {
+    return;
+  }
+  document.documentElement.dataset.colorTheme = theme;
+  window.localStorage.setItem(COLOR_THEME_STORAGE_KEY, theme as string);
+}
+
+function toggle(): void {
+  setTheme(
     document.documentElement.dataset.colorTheme === ColorThemeValue.Dark ? ColorThemeValue.Light : ColorThemeValue.Dark
   );
 }
@@ -41,10 +47,10 @@ window
 export const ColorTheme = {
   initialize,
   toggle,
-  get theme(): ColorThemeValue {
+  get theme(): string {
     return (document.documentElement.dataset.colorTheme as ColorThemeValue) || DEFAULT_COLOR_THEME_VALUE;
   },
-  set theme(theme: ColorThemeValue) {
+  set theme(theme: string) {
     setTheme(theme);
   }
 };

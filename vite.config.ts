@@ -43,6 +43,7 @@ export default defineConfig(async ({ command }) => {
   };
 
   const config: UserConfig = {
+    appType: 'mpa',
     root: 'src',
     publicDir: 'public',
     mode,

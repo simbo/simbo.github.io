@@ -1,4 +1,4 @@
-const svgIconCache = new Map<string, string>();
+const SVG_ICON_CACHE = new Map<string, string>();
 
 export const ICON_NAME_ATTRIBUTE = 'icon-name';
 export class SvgIcon extends HTMLElement {
@@ -24,11 +24,11 @@ export class SvgIcon extends HTMLElement {
   }
 
   private async getIcon(iconName: string): Promise<string> {
-    if (!svgIconCache.has(iconName)) {
+    if (!SVG_ICON_CACHE.has(iconName)) {
       const { default: importedIcon } = await import(`./svg-icons/${iconName}.ts`);
-      svgIconCache.set(iconName, importedIcon);
+      SVG_ICON_CACHE.set(iconName, importedIcon);
     }
-    const icon = svgIconCache.get(iconName) as string;
+    const icon = SVG_ICON_CACHE.get(iconName) as string;
     return icon;
   }
 }

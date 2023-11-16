@@ -2,6 +2,8 @@ command-prompt {
   display: block;
 
   .output {
+    min-height: lines(1);
+
     &.is-command {
       color: var(--terminal-dim);
 

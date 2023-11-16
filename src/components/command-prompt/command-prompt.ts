@@ -1,7 +1,7 @@
-import { Opts as ParameterParserOptions, ParsedArgs as ParsedParameters } from 'minimist';
+import { parseParameters } from '../../lib/parse-parameters';
 
-import { Output } from './command-prompt.types';
-import { getProgram } from './programs';
+import { getCommandHandler } from './command-handlers';
+import { CommandOutput } from './command-prompt.types';
 
 let idCounter = 0;
 
@@ -12,8 +12,6 @@ export class CommandPrompt extends HTMLElement {
   public readonly outputsElement = document.createElement('div');
 
   private readonly inputId = `prompt-input${++idCounter}`;
-
-  private parameterParser!: (parameters?: string[], options?: ParameterParserOptions) => ParsedParameters;
 
   public constructor() {
     super();
@@ -39,7 +37,7 @@ export class CommandPrompt extends HTMLElement {
     this.addOutput({ type: 'text', content });
   }
 
-  private addOutput({ type, content }: Output): void {
+  private addOutput({ type, content }: CommandOutput): void {
     const outputElement = document.createElement('div');
     outputElement.classList.add('output', `is-${type}`);
     if (type === 'text') outputElement.innerHTML = content;
@@ -70,20 +68,13 @@ export class CommandPrompt extends HTMLElement {
   }
 
   private async runCommand(command: string, parametersString: string): Promise<void> {
-    const parameters = await this.parseParameters(parametersString);
+    const parameters = parseParameters(parametersString);
     this.addOutput({
       type: 'command',
       content: `${command}${parametersString.length > 0 ? ` ${parametersString}` : ''}`
     });
-    const program = await getProgram(command);
-    if (typeof program === 'string') this.outputText(program);
-    else program(this, parameters);
-  }
-
-  private async parseParameters(input: string): Promise<ParsedParameters> {
-    if (!this.parameterParser) {
-      this.parameterParser = (await import('minimist')).default;
-    }
-    return this.parameterParser([input]);
+    const handler = await getCommandHandler(command);
+    if (typeof handler === 'string') this.outputText(handler);
+    else handler(this, parameters);
   }
 }

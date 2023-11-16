@@ -1,9 +1,9 @@
 import { TypedText } from '../../typed-text/typed-text';
-import { ProgramFunction } from '../command-prompt.types';
+import { CommandHandler } from '../command-prompt.types';
 
-const clear: ProgramFunction = async (prompt, parameters) => {
+const clear: CommandHandler = async (prompt, { options, inputs }) => {
   prompt.outputsElement.innerHTML = '';
-  if (parameters.a || parameters.all || parameters._.includes('all')) {
+  if (options.a || options.all || inputs.includes('all')) {
     (document.querySelector('typed-text') as TypedText).remove();
   }
 };

@@ -1,0 +1,104 @@
+.terminal {
+  @extend %font--mono, %material-shadow--2;
+  display: block;
+  position: relative;
+  padding: 2rem;
+  width: 100%;
+  background: var(--foreground-color);
+  border: remPx(1) solid var(--border-color);
+  border-radius: remPx(3);
+  font-size: 1.2em;
+  white-space: pre-wrap;
+
+  &::before {
+    @extend %material-shadow--2;
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 2.3em;
+    height: 2.3em;
+    background: url('/simbo-avatar-tiny.png') center center no-repeat;
+    background-size: contain;
+    border-radius: 50%;
+    border: remPx(1) solid var(--border-color);
+    transform: translate(23%, -23%);
+  }
+
+  @media screen and (max-width: 550px) {
+    padding: 2rem 1rem 1rem;
+    border-radius: 0;
+    top: -1rem;
+    width: calc(100% + 2rem);
+
+    &::before {
+      transform: translate(-40%, 40%);
+    }
+  }
+
+  @media screen and (max-width: 500px) {
+    font-size: 1.1em;
+  }
+  @media screen and (max-width: 450px) {
+    font-size: 1em;
+  }
+  @media screen and (max-width: 400px) {
+    font-size: 0.9em;
+  }
+
+  .intro,
+  .links {
+    display: inline;
+  }
+
+  $terminalColors: black, blue, green, cyan, red, magenta, yellow, white, dim;
+
+  @each $foo in $terminalColors {
+    .#{'' + $foo} {
+      color: var(--terminal-#{$foo});
+    }
+    .bg-#{'' + $foo} {
+      background-color: var(--terminal-#{$foo});
+    }
+  }
+
+  .nowrap {
+    white-space: nowrap;
+  }
+
+  typed-text + command-prompt {
+    margin-top: lines(1);
+  }
+
+  button {
+    color: var(--terminal-magenta);
+    cursor: progress;
+  }
+
+  .has-initial-content button {
+    cursor: pointer;
+    color: var(--terminal-blue);
+    text-decoration: underline;
+  }
+
+  .has-additional-content button {
+    color: inherit;
+    cursor: text;
+  }
+
+  .link {
+    text-decoration: none;
+
+    &__type {
+      color: var(--primary-color);
+
+      &::after {
+        content: ':';
+      }
+    }
+    &__label {
+      text-decoration: underline;
+    }
+  }
+}

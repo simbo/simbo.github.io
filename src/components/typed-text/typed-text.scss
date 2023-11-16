@@ -1,93 +1,23 @@
 typed-text {
-  @extend %font--mono, %material-shadow--2;
   display: block;
-  position: relative;
-  padding: 1.5em 1.5em 2.5em;
-  width: 100%;
-  background: var(--foreground-color);
-  border: remPx(1) solid var(--border-color);
-  border-radius: remPx(3);
-  font-size: 0.9em;
-  white-space: pre-wrap;
 
-  @media screen and (min-width: 440px) {
-    font-size: 1em;
-  }
-
-  @media screen and (min-width: 440px) {
-    font-size: 1.1em;
-  }
-
-  @media screen and (min-width: 480px) {
-    font-size: 1.2em;
-  }
-
-  @media screen and (min-width: 544px) {
-    font-size: 1.3em;
-  }
-
-  &::before {
-    @extend %material-shadow--3;
-    content: '';
-    display: block;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 2.3em;
-    height: 2.3em;
-    background: url('/simbo-avatar-tiny.png') center center no-repeat;
-    background-size: contain;
-    border-radius: 50%;
-    border: remPx(1) solid var(--border-color);
-    transform: translate(-23%, 23%);
-  }
-
-  &::after {
-    content: '';
-    display: inline-block;
-    width: 0.55em;
-    height: 1em;
-    background-color: currentColor;
-    line-height: 1;
-    opacity: 0.8;
-    transform: translate(0.05em, 0.15em);
-    animation: blink 0.8s steps(2, start) infinite;
-  }
-
-  button {
-    color: var(--highlight-color);
-    cursor: progress;
-  }
-
-  &.has-initial-content button {
-    cursor: pointer;
-    color: var(--link-color);
-    text-decoration: underline;
-  }
-
-  &.has-additional-content button {
-    color: inherit;
-    cursor: text;
-  }
-
-  .link {
-    text-decoration: none;
-
-    &__type {
-      color: var(--primary-color);
-
-      &::after {
-        content: ':';
-      }
-    }
-    &__label {
-      text-decoration: underline;
+  &.has-cursor {
+    &::after {
+      content: '';
+      display: inline-block;
+      width: 0.55em;
+      height: 1em;
+      background-color: currentColor;
+      line-height: 1;
+      opacity: 0.8;
+      transform: translate(0.05em, 0.15em);
+      animation: blink 0.8s steps(2, start) infinite;
     }
   }
-}
 
-@keyframes blink {
-  to {
-    visibility: hidden;
+  @keyframes blink {
+    to {
+      visibility: hidden;
+    }
   }
 }

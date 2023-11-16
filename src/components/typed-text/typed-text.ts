@@ -8,6 +8,8 @@ export const STOPPED_TYPING_EVENT_NAME = 'stopped-typing';
 
 const DEFAULT_TYPE_DELAY = 23;
 
+const HAS_CURSOR_CLASSNAME = 'has-cursor';
+
 const RX_CODE_SPAN = /<span\s+code="(\d+|stop)"[^>]*><\/span>/gi;
 const RX_CODE = /^\^(\d+|stop)/i;
 const RX_BREAK = /^<br\s*\/?>/i;
@@ -100,6 +102,7 @@ export class TypedText extends HTMLElement {
   }
 
   private type(): void {
+    this.classList.add(HAS_CURSOR_CLASSNAME);
     const step = this.steps[this.nextStep];
     this.setTimeout(() => {
       this.innerHTML = step.output;
@@ -108,6 +111,7 @@ export class TypedText extends HTMLElement {
         this.setTimeout(() => this.type(), this.humanizedDelay);
       } else {
         this.clearTimeout();
+        this.classList.remove(HAS_CURSOR_CLASSNAME);
         this.dispatchEvent(new CustomEvent(STOPPED_TYPING_EVENT_NAME));
       }
     }, step.pauseDuration);

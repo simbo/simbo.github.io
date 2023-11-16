@@ -8,9 +8,9 @@ export class SvgIcon extends HTMLElement {
     super();
   }
 
-  public attributeChangedCallback(attribute: string, _oldIconName: string, iconName: string): void {
+  public attributeChangedCallback(attribute: string, _oldValue: string, value: string): void {
     if (attribute === ICON_NAME_ATTRIBUTE) {
-      this.setIcon(iconName);
+      this.setIcon(value);
     }
   }
 

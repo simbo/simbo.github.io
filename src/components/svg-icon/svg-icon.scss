@@ -9,12 +9,12 @@ svg-icon {
 
   &,
   &.as-inline {
-    display: inline-flex;
+    display: inline-block;
     transform: translateY(-0.125em);
   }
 
   &.as-block {
-    display: flex;
+    display: block;
     transform: none;
   }
 

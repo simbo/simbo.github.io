@@ -7,13 +7,13 @@ svg-icon {
   align-items: center;
   justify-content: center;
 
-  &,
-  &.as-inline {
+  &.is-inline {
     display: inline-block;
     transform: translateY(-0.125em);
   }
 
-  &.as-block {
+  &,
+  &.is-block {
     display: block;
     transform: none;
   }

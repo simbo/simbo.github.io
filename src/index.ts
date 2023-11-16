@@ -11,6 +11,8 @@ const ADDITIONAL_CONTENT_CLASS = 'has-additional-content';
 
 const typedText = document.querySelector('typed-text') as TypedText;
 
+typedText.after(document.createElement('command-prompt'));
+
 const onStopTyping = () => {
   typedText.removeEventListener(STOPPED_TYPING_EVENT_NAME, onStopTyping);
   typedText.classList.add(INITIAL_CONTENT_CLASS);

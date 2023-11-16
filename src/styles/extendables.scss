@@ -9,15 +9,11 @@
   vertical-align: baseline;
 }
 
-%button-reset {
+%input-reset {
   @extend %reset;
   border: 0;
   border-radius: 0;
   background: none;
-  appearance: button;
-  -webkit-appearance: button;
-  user-select: none;
-  cursor: pointer;
 
   &:-moz-focusring {
     outline: none;
@@ -26,6 +22,14 @@
   &:focus {
     outline: none;
   }
+}
+
+%button-reset {
+  @extend %input-reset;
+  appearance: button;
+  -webkit-appearance: button;
+  user-select: none;
+  cursor: pointer;
 }
 
 %font--sans {

@@ -1,0 +1,35 @@
+command-prompt {
+  display: block;
+
+  .output {
+    &.is-command {
+      color: var(--terminal-dim);
+
+      &::before {
+        content: '# ';
+      }
+    }
+
+    &.is-error {
+      color: var(--terminal-red);
+    }
+  }
+
+  .prompt {
+    display: flex;
+
+    &-label {
+      display: block;
+      cursor: text;
+
+      &::before {
+        content: '❯ ';
+      }
+    }
+
+    &-input {
+      @extend %input-reset;
+      width: 100%;
+    }
+  }
+}

@@ -16,7 +16,7 @@ const onStopTyping = () => {
   typedText.classList.add(INITIAL_CONTENT_CLASS);
 };
 
-const onClickLink = (event: Event) => {
+const onClickContinue = (event: Event) => {
   if ((event.target as HTMLElement).tagName === 'BUTTON') {
     event.preventDefault();
     if (typedText.classList.contains(INITIAL_CONTENT_CLASS)) {
@@ -28,4 +28,4 @@ const onClickLink = (event: Event) => {
 };
 
 typedText.addEventListener(STOPPED_TYPING_EVENT_NAME, onStopTyping);
-typedText.addEventListener('click', onClickLink);
+typedText.addEventListener('click', onClickContinue);

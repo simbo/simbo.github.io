@@ -34,6 +34,14 @@ command-prompt {
       @extend %input-reset;
       width: 100%;
     }
+
+    // Avoiding zoom when focusing inputs on mobile devices
+    @media screen and (max-width: 450px) {
+      input[type='text'],
+      input[type='text']:focus {
+        font-size: 16px;
+      }
+    }
   }
 }
 

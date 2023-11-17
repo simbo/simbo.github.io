@@ -31,6 +31,20 @@ html {
   }
 }
 
+/**
+ * Avoiding zoom when focusing inputs on mobile devices
+ */
+input[type='text'],
+input[type='text']:focus {
+  font-size: 16px;
+  @media screen and (min-width: 1280px) {
+    font-size: 18px;
+  }
+  @media screen and (min-width: 1660px) {
+    font-size: 20px;
+  }
+}
+
 body {
   @extend %reset;
   min-height: 100vh;

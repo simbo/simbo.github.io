@@ -2,12 +2,13 @@ import { CommandHandler } from './command-prompt.types';
 
 const COMMAND_HANDLER_CACHE = new Map<string, CommandHandler>();
 
-const COMMAND_ALIASES: { [alias: string]: string } = {
+export const COMMAND_ALIASES: { [alias: string]: string } = {
   cls: 'clear',
   hey: 'hello',
   hi: 'hello',
   max: 'maximize',
   min: 'minimize',
+  print: 'echo',
   theme: 'color-theme'
 };
 

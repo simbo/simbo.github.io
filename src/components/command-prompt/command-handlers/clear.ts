@@ -4,7 +4,7 @@ import { CommandHandler } from '../command-prompt.types';
 const clear: CommandHandler = async (prompt, { options, inputs }) => {
   prompt.outputsElement.innerHTML = '';
   if (options.a || options.all || inputs.includes('all')) {
-    (document.querySelector('typed-text') as TypedText).remove();
+    (document.querySelector('typed-text') as TypedText).innerHTML = '';
   }
 };
 

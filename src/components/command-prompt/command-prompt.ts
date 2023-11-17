@@ -1,17 +1,18 @@
 import { parseParameters } from '../../lib/parse-parameters';
 
 import { getCommandHandler } from './command-handlers';
+import { CommandHistory } from './command-history';
 import { CommandOutput } from './command-prompt.types';
 
-let idCounter = 0;
+let ID_COUNTER = 0;
 
 export class CommandPrompt extends HTMLElement {
   private readonly promptElement = document.createElement('div');
   private readonly labelElement = document.createElement('label');
   private readonly inputElement = document.createElement('input');
   public readonly outputsElement = document.createElement('div');
-
-  private readonly inputId = `prompt-input${++idCounter}`;
+  private readonly history = new CommandHistory();
+  private readonly inputId = `prompt-input${++ID_COUNTER}`;
 
   public constructor() {
     super();
@@ -26,6 +27,7 @@ export class CommandPrompt extends HTMLElement {
     this.inputElement.id = this.inputId;
     this.inputElement.type = 'text';
     this.inputElement.addEventListener('keypress', event => this.onPromptKeyPress(event));
+    this.inputElement.addEventListener('keydown', event => this.onPromptKeyDown(event));
 
     this.append(this.outputsElement);
     this.promptElement.append(this.labelElement);
@@ -55,6 +57,21 @@ export class CommandPrompt extends HTMLElement {
     }
   }
 
+  private onPromptKeyDown(event: KeyboardEvent): void {
+    if (event.key === 'ArrowUp' || event.key === 'ArrowDown') {
+      let command: string | undefined;
+      if (event.key === 'ArrowUp') {
+        command = this.history.backward();
+      } else if (event.key === 'ArrowDown') {
+        command = this.history.forward();
+      }
+      if (typeof command === 'string') {
+        event.preventDefault();
+        this.inputElement.value = command;
+      }
+    }
+  }
+
   private parseInput(input: string): void {
     input = input.trim();
     let commandLength = input.search(/\s|$/);
@@ -69,10 +86,12 @@ export class CommandPrompt extends HTMLElement {
 
   private async runCommand(command: string, parametersString: string): Promise<void> {
     const parameters = parseParameters(parametersString);
+    const input = `${command}${parametersString.length > 0 ? ` ${parametersString}` : ''}`;
     this.addOutput({
       type: 'command',
-      content: `${command}${parametersString.length > 0 ? ` ${parametersString}` : ''}`
+      content: input
     });
+    this.history.add(input);
     const handler = await getCommandHandler(command);
     if (typeof handler === 'string') return this.outputText(handler);
     return handler(this, parameters);

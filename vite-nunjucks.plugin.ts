@@ -44,8 +44,8 @@ export default (options: Partial<NunjucksPluginOptions> = {}): Plugin => {
       return [];
     },
     transformIndexHtml: {
-      enforce: 'pre',
-      transform: async (html: string, context: IndexHtmlTransformContext): Promise<IndexHtmlTransformResult | void> =>
+      order: 'pre',
+      handler: async (html: string, context: IndexHtmlTransformContext): Promise<IndexHtmlTransformResult | void> =>
         new Promise((resolve, reject) => {
           nunjucksEnvironment.renderString(
             html,

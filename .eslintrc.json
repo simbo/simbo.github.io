@@ -14,10 +14,10 @@
   },
   "plugins": ["@typescript-eslint"],
   "rules": {
-    "unicorn/no-await-expression-member": "off",
     "unicorn/explicit-length-check": "off",
     "unicorn/no-array-for-each": "off",
     "unicorn/no-array-reduce": "off",
+    "unicorn/no-await-expression-member": "off",
     "unicorn/no-for-loop": "off",
     "unicorn/no-null": "off",
     "unicorn/prevent-abbreviations": "off"

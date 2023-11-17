@@ -1,8 +1,9 @@
 import './index.scss';
 import './components';
 
-import { STOPPED_TYPING_EVENT_NAME, TypedText } from './components/typed-text/typed-text';
+import { STARTED_TYPING_EVENT_NAME, STOPPED_TYPING_EVENT_NAME, TypedText } from './components/typed-text/typed-text';
 import { ColorTheme } from './lib/color-theme';
+import { handleEventOnce } from './lib/handle-event-once';
 
 ColorTheme.initialize();
 
@@ -11,13 +12,18 @@ const ADDITIONAL_CONTENT_CLASS = 'has-additional-content';
 
 const typedText = document.querySelector('typed-text') as TypedText;
 
-const onStopTyping = () => {
-  typedText.removeEventListener(STOPPED_TYPING_EVENT_NAME, onStopTyping);
+handleEventOnce(typedText, STARTED_TYPING_EVENT_NAME, () => {
+  import('./components/command-prompt/command-prompt').then(({ CommandPrompt }) =>
+    customElements.define('command-prompt', CommandPrompt)
+  );
+});
+
+handleEventOnce(typedText, STOPPED_TYPING_EVENT_NAME, () => {
   typedText.classList.add(INITIAL_CONTENT_CLASS);
   typedText.after(document.createElement('command-prompt'));
-};
+});
 
-const onClickContinue = (event: Event) => {
+typedText.addEventListener('click', (event: Event) => {
   if ((event.target as HTMLElement).tagName === 'BUTTON') {
     event.preventDefault();
     if (typedText.classList.contains(INITIAL_CONTENT_CLASS)) {
@@ -26,7 +32,4 @@ const onClickContinue = (event: Event) => {
       typedText.startTyping();
     }
   }
-};
-
-typedText.addEventListener(STOPPED_TYPING_EVENT_NAME, onStopTyping);
-typedText.addEventListener('click', onClickContinue);
+});

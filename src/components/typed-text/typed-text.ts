@@ -5,6 +5,7 @@ interface Step {
 }
 
 export const STOPPED_TYPING_EVENT_NAME = 'stopped-typing';
+export const STARTED_TYPING_EVENT_NAME = 'started-typing';
 
 const DEFAULT_TYPE_DELAY = 23;
 
@@ -40,6 +41,7 @@ export class TypedText extends HTMLElement {
   }
 
   public startTyping(): void {
+    this.dispatchEvent(new CustomEvent(STARTED_TYPING_EVENT_NAME));
     this.type();
   }
 

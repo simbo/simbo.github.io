@@ -83,7 +83,8 @@
     white-space: nowrap;
   }
 
-  typed-text:not(:empty) + command-prompt {
+  typed-text:not(:empty) + command-prompt,
+  typed-text.has-cursor:empty + command-prompt {
     margin-top: lines(1);
   }
 

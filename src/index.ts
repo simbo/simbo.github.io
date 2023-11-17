@@ -12,10 +12,7 @@ const ADDITIONAL_CONTENT_CLASS = 'has-additional-content';
 
 const typedText = document.querySelector('typed-text') as TypedText;
 
-handleEventOnce(typedText, STOPPED_TYPING_EVENT_NAME, () => {
-  typedText.classList.add(INITIAL_CONTENT_CLASS);
-  typedText.after(document.createElement('command-prompt'));
-});
+handleEventOnce(typedText, STOPPED_TYPING_EVENT_NAME, () => typedText.classList.add(INITIAL_CONTENT_CLASS));
 
 typedText.addEventListener('click', (event: Event) => {
   if ((event.target as HTMLElement).tagName === 'BUTTON') {

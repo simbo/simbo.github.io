@@ -14,6 +14,7 @@ const KNOWN_COMMANDS = [
   'minimize',
   'reload',
   'test',
+  'type',
   'version'
 ]
   .sort()

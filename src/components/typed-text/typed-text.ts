@@ -41,8 +41,30 @@ export class TypedText extends HTMLElement {
   }
 
   public startTyping(): void {
+    this.classList.add(HAS_CURSOR_CLASSNAME);
     this.dispatchEvent(new CustomEvent(STARTED_TYPING_EVENT_NAME));
     this.type();
+  }
+
+  public stopTyping(): void {
+    this.clearTimeout();
+    this.classList.remove(HAS_CURSOR_CLASSNAME);
+    this.dispatchEvent(new CustomEvent(STOPPED_TYPING_EVENT_NAME));
+  }
+
+  public restartTyping(): void {
+    this.stopTyping();
+    this.nextStep = 0;
+    this.innerHTML = '';
+    this.startTyping();
+  }
+
+  public get isTyping(): boolean {
+    return this.typeTimeout !== 0;
+  }
+
+  public get typingDone(): boolean {
+    return this.steps.length === this.nextStep;
   }
 
   public queueContent(content: string): void {
@@ -104,7 +126,6 @@ export class TypedText extends HTMLElement {
   }
 
   private type(): void {
-    this.classList.add(HAS_CURSOR_CLASSNAME);
     const step = this.steps[this.nextStep];
     this.setTimeout(() => {
       this.innerHTML = step.output;
@@ -112,9 +133,7 @@ export class TypedText extends HTMLElement {
       if (!step.stopAfterwards && this.nextStep < this.steps.length) {
         this.setTimeout(() => this.type(), this.humanizedDelay);
       } else {
-        this.clearTimeout();
-        this.classList.remove(HAS_CURSOR_CLASSNAME);
-        this.dispatchEvent(new CustomEvent(STOPPED_TYPING_EVENT_NAME));
+        this.stopTyping();
       }
     }, step.pauseDuration);
   }
@@ -130,6 +149,7 @@ export class TypedText extends HTMLElement {
   private clearTimeout(): void {
     if (this.typeTimeout) {
       window.clearTimeout(this.typeTimeout);
+      this.typeTimeout = 0;
     }
   }
 }

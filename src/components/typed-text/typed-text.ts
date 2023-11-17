@@ -52,10 +52,14 @@ export class TypedText extends HTMLElement {
     this.dispatchEvent(new CustomEvent(STOPPED_TYPING_EVENT_NAME));
   }
 
-  public restartTyping(): void {
+  public resetTyping(): void {
     this.stopTyping();
     this.nextStep = 0;
     this.innerHTML = '';
+  }
+
+  public restartTyping(): void {
+    this.resetTyping();
     this.startTyping();
   }
 

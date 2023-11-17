@@ -4,13 +4,15 @@ import { getCommandHandler } from './command-handlers';
 import { CommandHistory } from './command-history';
 import { CommandOutput } from './command-prompt.types';
 
+const COMMAND_IN_PROGRESS_CLASSNAME = 'command-in-progress';
+
 let ID_COUNTER = 0;
 
 export class CommandPrompt extends HTMLElement {
+  private readonly outputsElement = document.createElement('div');
   private readonly promptElement = document.createElement('div');
   private readonly labelElement = document.createElement('label');
   private readonly inputElement = document.createElement('input');
-  public readonly outputsElement = document.createElement('div');
   private readonly history = new CommandHistory();
   private readonly inputId = `prompt-input${++ID_COUNTER}`;
 
@@ -39,6 +41,18 @@ export class CommandPrompt extends HTMLElement {
     this.addOutput({ type: 'text', content });
   }
 
+  public outputError(error: Error | string) {
+    this.addOutput({ type: 'error', content: `${(error as Error).message || error}` });
+  }
+
+  public clearOutput() {
+    this.outputsElement.innerHTML = '';
+  }
+
+  public get commandIsInProgress(): boolean {
+    return this.classList.contains(COMMAND_IN_PROGRESS_CLASSNAME);
+  }
+
   private addOutput({ type, content }: CommandOutput): void {
     const outputElement = document.createElement('div');
     outputElement.classList.add('output', `is-${type}`);
@@ -51,9 +65,11 @@ export class CommandPrompt extends HTMLElement {
   private onPromptKeyPress(event: KeyboardEvent): void {
     if (event.key === 'Enter') {
       event.preventDefault();
-      const command = this.inputElement.value;
-      this.inputElement.value = '';
-      this.parseInput(command);
+      if (!this.commandIsInProgress) {
+        const command = this.inputElement.value;
+        this.inputElement.value = '';
+        this.parseInput(command);
+      }
     }
   }
 
@@ -79,21 +95,26 @@ export class CommandPrompt extends HTMLElement {
     const command = input.slice(0, commandLength);
     if (command.length === 0) return;
     const parameters = input.slice(commandLength).trim();
-    this.runCommand(command, parameters).catch(error =>
-      this.addOutput({ type: 'error', content: `${error.message || error}` })
-    );
+    this.onCommandStart(input);
+    this.runCommand(command, parameters)
+      .catch(error => this.outputError(error))
+      .finally(() => this.onCommandEnd());
   }
 
   private async runCommand(command: string, parametersString: string): Promise<void> {
-    const parameters = parseParameters(parametersString);
-    const input = `${command}${parametersString.length > 0 ? ` ${parametersString}` : ''}`;
-    this.addOutput({
-      type: 'command',
-      content: input
-    });
-    this.history.add(input);
     const handler = await getCommandHandler(command);
     if (typeof handler === 'string') return this.outputText(handler);
+    const parameters = parseParameters(parametersString);
     return handler(this, parameters);
+  }
+
+  private onCommandStart(input: string): void {
+    this.addOutput({ type: 'command', content: input });
+    this.history.add(input);
+    this.classList.add(COMMAND_IN_PROGRESS_CLASSNAME);
+  }
+
+  private onCommandEnd(): void {
+    this.classList.remove(COMMAND_IN_PROGRESS_CLASSNAME);
   }
 }

@@ -4,6 +4,7 @@ import { CommandHandler } from '../command-prompt.types';
 const type: CommandHandler = async (prompt, { inputs }) => {
   const typedText = document.querySelector('typed-text') as TypedText;
   switch ((inputs[0] || '').toLowerCase()) {
+    case 'start':
     case 'continue': {
       if (typedText.isTyping) {
         throw new Error('typing is already in progress');
@@ -25,6 +26,11 @@ const type: CommandHandler = async (prompt, { inputs }) => {
       }
       typedText.stopTyping();
       prompt.outputText('typing stopped');
+      break;
+    }
+    case 'reset': {
+      typedText.resetTyping();
+      prompt.outputText('typing resetted');
       break;
     }
     default: {

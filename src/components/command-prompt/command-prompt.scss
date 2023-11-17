@@ -2,6 +2,7 @@ command-prompt {
   display: block;
 
   .output {
+    position: relative;
     min-height: lines(1);
 
     &.is-command {
@@ -32,6 +33,41 @@ command-prompt {
     &-input {
       @extend %input-reset;
       width: 100%;
+    }
+  }
+}
+
+command-prompt .output:nth-last-child(1 of .is-command)::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: -0.75em;
+  $size: 0.3em;
+  width: $size;
+  height: $size;
+  border-radius: 50%;
+  transform: translateY(-50%) scale(0);
+  transition: transform 0.2s ease-in-out;
+  background-color: var(--terminal-orange);
+  box-shadow: 0 0 1px var(--terminal-orange);
+}
+
+command-prompt.command-in-progress .output:nth-last-child(1 of .is-command)::after {
+  animation: 1s dot-blink ease-in-out infinite;
+
+  @keyframes dot-blink {
+    from,
+    to {
+      transform: translateY(-50%) scale(0.1);
+    }
+    25% {
+      transform: translateY(-50%) scale(1);
+    }
+    50% {
+      transform: translateY(-50%) scale(0.1);
+    }
+    75% {
+      transform: translateY(-50%) scale(1);
     }
   }
 }

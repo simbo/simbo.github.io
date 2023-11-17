@@ -74,7 +74,7 @@ export class CommandPrompt extends HTMLElement {
       content: `${command}${parametersString.length > 0 ? ` ${parametersString}` : ''}`
     });
     const handler = await getCommandHandler(command);
-    if (typeof handler === 'string') this.outputText(handler);
-    else handler(this, parameters);
+    if (typeof handler === 'string') return this.outputText(handler);
+    return handler(this, parameters);
   }
 }

@@ -34,8 +34,6 @@ html {
 /**
  * Avoiding zoom when focusing inputs on mobile devices
  */
-button,
-button:focus,
 input[type='text'],
 input[type='text']:focus {
   font-size: 16px;

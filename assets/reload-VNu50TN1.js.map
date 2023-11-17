@@ -1,0 +1,1 @@
+{"version":3,"file":"reload-VNu50TN1.js","sources":["../../src/components/command-prompt/command-handlers/reload.ts"],"sourcesContent":["import { CommandHandler } from '../command-prompt.types';\n\nconst reload: CommandHandler = async () => {\n  window.location.reload();\n};\n\nexport default reload;\n"],"names":["reload"],"mappings":"AAEA,MAAMA,EAAyB,SAAY,CACzC,OAAO,SAAS,QAClB"}

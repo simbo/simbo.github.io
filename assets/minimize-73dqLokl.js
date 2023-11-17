@@ -1,0 +1,2 @@
+const i=async e=>{if(window.matchMedia("(max-width: 550px)").matches)throw new Error("sorry, the terminal view can not be resized on small viewports");document.documentElement.classList.contains("terminal-maximized")?(document.documentElement.classList.remove("terminal-maximized"),e.outputText("terminal view minimized")):e.outputText("terminal view is already minimized")};export{i as default};
+//# sourceMappingURL=minimize-73dqLokl.js.map

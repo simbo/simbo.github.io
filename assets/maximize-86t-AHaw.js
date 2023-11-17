@@ -1,0 +1,2 @@
+const i=async e=>{if(window.matchMedia("(max-width: 550px)").matches)throw new Error("sorry, the terminal view can not be resized on small viewports");document.documentElement.classList.contains("terminal-maximized")?e.outputText("terminal view is already maximized"):(document.documentElement.classList.add("terminal-maximized"),e.outputText("terminal view maximized"))};export{i as default};
+//# sourceMappingURL=maximize-86t-AHaw.js.map

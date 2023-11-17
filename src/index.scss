@@ -19,23 +19,20 @@ body {
 }
 
 .main {
-  @extend %flex--center;
   flex: 1 0 auto;
   width: 100%;
-  margin: 2rem auto;
-  max-width: calc(100% - 2rem);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 
-  @media screen and (max-width: 767px) {
-    margin: 1rem auto;
+  .terminal-maximized & {
     justify-content: flex-start;
   }
-}
 
-.content {
-  @extend %flex--center;
-  width: 32rem;
-  margin: 0 auto;
-  max-width: 100%;
+  @media screen and (max-width: 767px) {
+    justify-content: flex-start;
+  }
 }
 
 @import './styles/terminal.scss';

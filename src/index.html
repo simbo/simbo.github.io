@@ -10,41 +10,39 @@
 </header>
 
 <main class="main">
-  <div class="content">
-    <!-- prettier-ignore -->
-    <div class="terminal"><typed-text>
-      <div class="intro">
-        <span code="1250"></span><strong>Hello World!</strong>
-        <span code="1000"></span><br />
-        <span code="250"></span><br />
-        <span code="250"></span>You just stumbled across my website.<br />
-        <span code="750"></span>You are so <span class="nowrap">awesome.
-        <span code="500"></span>.
-        <span code="500"></span>.</span>
-        <span code="750"></span><br />
-        <span code="250"></span><br />
-        <span code="250"></span>There is not much to see here
-        <span code="750"></span> but you can <span code="250"></span>
-        <span class="nowrap"><button>get in touch with me</button><span code="750"></span>,</span> if you feel like you have to.
-        <span code="500"></span> :)
-        <span code="750"></span><br />
-        <span code="250"></span><br />
-        <span code="750"></span>{{ AUTHOR_NAME }}
-        <span code="500"></span> ~
-        <span code="500"></span> {{ AUTHOR_USER }}
-        <span code="250"></span><span code="stop"></span><br />
-      </div>
-      <div class="links">
-        {% for link in LINKS %}<br /> - <span code="400"></span>
-          <a href="{{ link.href }}" target="_blank" class="link">
-            <span class="link__type">{{ link.type }}</span> 
-            <span class="link__label">{{ link.label }}</span>
-          </a>
-          <br />
-        {% endfor %}
-      </div>
-    </typed-text></div>
-  </div>
+  <!-- prettier-ignore -->
+  <div class="terminal"><typed-text>
+    <div class="intro">
+      <span code="1250"></span><strong>Hello World!</strong>
+      <span code="1000"></span><br />
+      <span code="250"></span><br />
+      <span code="250"></span>You just stumbled across my website.<br />
+      <span code="750"></span>You are so <span class="nowrap">awesome.
+      <span code="500"></span>.
+      <span code="500"></span>.</span>
+      <span code="750"></span><br />
+      <span code="250"></span><br />
+      <span code="250"></span>There is not much to see here
+      <span code="750"></span> but you can <span code="250"></span>
+      <span class="nowrap"><button>get in touch with me</button><span code="750"></span>,</span> if you feel like you have to.
+      <span code="500"></span> :)
+      <span code="750"></span><br />
+      <span code="250"></span><br />
+      <span code="750"></span>{{ AUTHOR_NAME }}
+      <span code="500"></span> ~
+      <span code="500"></span> {{ AUTHOR_USER }}
+      <span code="250"></span><span code="stop"></span><br />
+    </div>
+    <div class="links">
+      {% for link in LINKS %}<br />  - <span code="400"></span>
+        <a href="{{ link.href }}" target="_blank" class="link">
+          <span class="link__type">{{ link.type }}</span> 
+          <span class="link__label">{{ link.label }}</span>
+        </a>
+        <br />
+      {% endfor %}
+    </div>
+  </typed-text></div>
 </main>
 
 <footer class="footer">

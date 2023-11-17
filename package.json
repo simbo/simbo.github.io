@@ -18,7 +18,7 @@
     "browserslist": "browserslist",
     "build": "tsc && vite build",
     "bundle-analyzer": "npx --yes vite-bundle-visualizer",
-    "dev": "vite --no-clear-screen",
+    "dev": "vite --no-clear-screen --host",
     "format:fix": "prettier --write .",
     "format": "prettier --check .",
     "lint:fix": "eslint -c .eslintrc.json --fix .",

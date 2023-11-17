@@ -1,7 +1,7 @@
 import './index.scss';
 import './components';
 
-import { STARTED_TYPING_EVENT_NAME, STOPPED_TYPING_EVENT_NAME, TypedText } from './components/typed-text/typed-text';
+import { STOPPED_TYPING_EVENT_NAME, TypedText } from './components/typed-text/typed-text';
 import { ColorTheme } from './lib/color-theme';
 import { handleEventOnce } from './lib/handle-event-once';
 
@@ -11,12 +11,6 @@ const INITIAL_CONTENT_CLASS = 'has-initial-content';
 const ADDITIONAL_CONTENT_CLASS = 'has-additional-content';
 
 const typedText = document.querySelector('typed-text') as TypedText;
-
-handleEventOnce(typedText, STARTED_TYPING_EVENT_NAME, () => {
-  import('./components/command-prompt/command-prompt').then(({ CommandPrompt }) =>
-    customElements.define('command-prompt', CommandPrompt)
-  );
-});
 
 handleEventOnce(typedText, STOPPED_TYPING_EVENT_NAME, () => {
   typedText.classList.add(INITIAL_CONTENT_CLASS);

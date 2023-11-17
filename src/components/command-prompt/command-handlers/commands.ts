@@ -12,6 +12,7 @@ const KNOWN_COMMANDS = [
   'help',
   'maximize',
   'minimize',
+  'reload',
   'test',
   'version'
 ]

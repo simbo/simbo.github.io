@@ -1,0 +1,2 @@
+function t(e){if(window.matchMedia("(max-width: 550px)").matches)throw new Error("sorry, the terminal view can not be resized on small viewports");return e==="max"?document.documentElement.classList.contains("terminal-maximized")?!1:(document.documentElement.classList.add("terminal-maximized"),!0):document.documentElement.classList.contains("terminal-maximized")?(document.documentElement.classList.remove("terminal-maximized"),!0):!1}export{t as r};
+//# sourceMappingURL=resize-terminal-view-9Q6q31pv.js.map

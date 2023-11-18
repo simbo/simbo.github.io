@@ -12,7 +12,9 @@ const ADDITIONAL_CONTENT_CLASS = 'has-additional-content';
 
 const typedText = document.querySelector('typed-text') as TypedText;
 
-handleEventOnce(typedText, STOPPED_TYPING_EVENT_NAME, () => typedText.classList.add(INITIAL_CONTENT_CLASS));
+handleEventOnce(typedText, STOPPED_TYPING_EVENT_NAME, () => {
+  typedText.classList.add(INITIAL_CONTENT_CLASS);
+});
 
 typedText.addEventListener('click', (event: Event) => {
   if ((event.target as HTMLElement).tagName === 'BUTTON') {
@@ -23,4 +25,9 @@ typedText.addEventListener('click', (event: Event) => {
       typedText.startTyping();
     }
   }
+});
+
+import('./components/command-prompt/command-prompt').then(({ CommandPrompt }) => {
+  customElements.define('command-prompt', CommandPrompt);
+  typedText.after(document.createElement('command-prompt'));
 });

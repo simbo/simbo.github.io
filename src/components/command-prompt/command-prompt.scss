@@ -4,18 +4,35 @@ command-prompt {
   .output {
     position: relative;
     min-height: lines(1);
+    word-break: break-word;
 
     &.is-command {
       color: var(--terminal-dim);
+      display: flex;
 
       &::before {
         content: '# ';
+        white-space: nowrap;
+      }
+
+      .command-input {
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
       }
     }
 
     &.is-error {
       color: var(--terminal-red);
     }
+  }
+
+  .output + .output.is-command {
+    margin-top: lines(1);
+  }
+
+  .outputs:not(:empty) + .prompt {
+    margin-top: lines(1);
   }
 
   .prompt {
@@ -54,28 +71,23 @@ command-prompt .output:nth-last-child(1 of .is-command)::after {
   width: $size;
   height: $size;
   border-radius: 50%;
-  transform: translateY(-50%) scale(0);
-  transition: transform 0.2s ease-in-out;
+  transform: translateY(-50%);
+  transition: opacity 0.2s ease-in-out;
   background-color: var(--terminal-orange);
   box-shadow: 0 0 1px var(--terminal-orange);
+  opacity: 0;
 }
 
 command-prompt.command-in-progress .output:nth-last-child(1 of .is-command)::after {
-  animation: 1s dot-blink ease-in-out infinite;
+  animation: 0.5s dot-blink ease-in-out infinite;
 
   @keyframes dot-blink {
     from,
     to {
-      transform: translateY(-50%) scale(0.1);
-    }
-    25% {
-      transform: translateY(-50%) scale(1);
+      opacity: 0.1;
     }
     50% {
-      transform: translateY(-50%) scale(0.1);
-    }
-    75% {
-      transform: translateY(-50%) scale(1);
+      opacity: 1;
     }
   }
 }

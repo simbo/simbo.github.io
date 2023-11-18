@@ -1,8 +1,7 @@
-import { parseParameters } from '../../lib/parse-parameters';
-
-import { getCommandHandler } from './command-handlers';
-import { CommandHistory } from './command-history';
 import { CommandOutput } from './command-prompt.types';
+import { getCommandModule } from './commands';
+import { CommandHistory } from './lib/command-history';
+import { parseParameters } from './lib/parse-parameters';
 
 const COMMAND_IN_PROGRESS_CLASSNAME = 'command-in-progress';
 
@@ -21,6 +20,7 @@ export class CommandPrompt extends HTMLElement {
   }
 
   public connectedCallback(): void {
+    this.outputsElement.classList.add('outputs');
     this.promptElement.classList.add('prompt');
     this.labelElement.classList.add('prompt-label');
     this.labelElement.setAttribute('for', this.inputId);
@@ -57,7 +57,12 @@ export class CommandPrompt extends HTMLElement {
     const outputElement = document.createElement('div');
     outputElement.classList.add('output', `is-${type}`);
     if (type === 'text') outputElement.innerHTML = content;
-    else outputElement.textContent = content;
+    else if (type === 'command') {
+      const command = document.createElement('span');
+      command.classList.add('command-input');
+      command.textContent = content;
+      outputElement.append(command);
+    } else outputElement.textContent = content;
     this.outputsElement.append(outputElement);
     this.inputElement.scrollIntoView();
   }
@@ -102,14 +107,14 @@ export class CommandPrompt extends HTMLElement {
   }
 
   private async runCommand(command: string, parametersString: string): Promise<void> {
-    const handler = await getCommandHandler(command);
+    const { handler } = await getCommandModule(command);
     if (typeof handler === 'string') return this.outputText(handler);
     const parameters = parseParameters(parametersString);
     return handler(this, parameters);
   }
 
   private onCommandStart(input: string): void {
-    this.addOutput({ type: 'command', content: input });
+    this.addOutput({ type: 'command', content: `${input}` });
     this.history.add(input);
     this.classList.add(COMMAND_IN_PROGRESS_CLASSNAME);
   }

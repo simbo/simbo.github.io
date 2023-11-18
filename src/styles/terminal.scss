@@ -68,7 +68,7 @@
     display: inline;
   }
 
-  $terminalColors: black, blue, green, cyan, red, magenta, yellow, white, orange, dim;
+  $terminalColors: black, blue, green, red, magenta, yellow, white, orange, dim;
 
   @each $foo in $terminalColors {
     .#{'' + $foo} {

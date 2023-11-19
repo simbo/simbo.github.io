@@ -1,2 +1,0 @@
-import{P as o}from"./command-prompt-mbGpnTLb.js";import{g as e}from"./get-command-aliases-u_nDM_7n.js";import"./index-pD3U_8-_.js";const m=o.sort().map(a=>{const s=e(a);return`  <span class="yellow">${a}</span>`+(s.length>0?` ${s.map(n=>`<span class="dim">${n}</span>`).join(" ")}`:"")}).join("<br>"),l={manpage:"displays an overview of public commands and their aliases",async handler(a){a.outputText(`known commands and their aliases:<br>${m}`)}};export{l as default};
-//# sourceMappingURL=commands-9qe9VUU2.js.map

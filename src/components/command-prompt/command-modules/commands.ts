@@ -13,10 +13,10 @@ const commands = PUBLIC_COMMANDS.sort()
   .join('<br>');
 
 const commandsModule: CommandModule = {
-  manpage: 'displays an overview of public commands and their aliases',
+  manpage: 'displays some commands and their aliases',
 
   async handler(prompt) {
-    prompt.outputText(`known commands and their aliases:<br>${commands}`);
+    prompt.outputText(`some commands and their aliases:<br>${commands}`);
   }
 };
 

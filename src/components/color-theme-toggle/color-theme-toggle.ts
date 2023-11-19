@@ -27,13 +27,12 @@ export class ColorThemeToggle extends HTMLElement {
   }
 
   private setIconNameByColorTheme(): void {
-    const colorTheme = document.documentElement.dataset.colorTheme as string;
     const iconName = {
       [ColorThemeValue.Light]: 'moon',
       [ColorThemeValue.Dark]: 'sun'
-    }[colorTheme];
-    if (iconName && iconName.length > 0) {
-      this.svgIcon.setAttribute(ICON_NAME_ATTRIBUTE, iconName as string);
+    }[document.documentElement.dataset.colorTheme as string];
+    if (iconName) {
+      this.svgIcon.setAttribute(ICON_NAME_ATTRIBUTE, iconName);
     }
   }
 }

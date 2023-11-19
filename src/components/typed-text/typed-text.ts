@@ -1,11 +1,10 @@
+import { STARTED_TYPING_EVENT_TYPE, STOPPED_TYPING_EVENT_TYPE, STOPPER_TYPED_EVENT_TYPE } from './typed-text-events';
+
 interface Step {
   pauseDuration: number;
   output: string;
   stopAfterwards?: boolean;
 }
-
-export const STOPPED_TYPING_EVENT_NAME = 'stopped-typing';
-export const STARTED_TYPING_EVENT_NAME = 'started-typing';
 
 const DEFAULT_TYPE_DELAY = 23;
 
@@ -34,22 +33,22 @@ export class TypedText extends HTMLElement {
 
   public connectedCallback(): void {
     this.typeDelay = Number.parseInt(this.getAttribute('type-delay') || '0', 10) || DEFAULT_TYPE_DELAY;
-    const content = this.innerHTML;
-    this.innerHTML = '';
-    this.queueContent(content);
-    this.startTyping();
+    // const content = this.innerHTML;
+    // this.innerHTML = '';
+    // this.queueContent(content);
+    // this.startTyping();
   }
 
   public startTyping(): void {
     this.classList.add(HAS_CURSOR_CLASSNAME);
-    this.dispatchEvent(new CustomEvent(STARTED_TYPING_EVENT_NAME));
+    this.dispatchEvent(new CustomEvent(STARTED_TYPING_EVENT_TYPE));
     this.type();
   }
 
   public stopTyping(): void {
     this.clearTimeout();
     this.classList.remove(HAS_CURSOR_CLASSNAME);
-    this.dispatchEvent(new CustomEvent(STOPPED_TYPING_EVENT_NAME));
+    this.dispatchEvent(new CustomEvent(STOPPED_TYPING_EVENT_TYPE));
   }
 
   public resetTyping(): void {
@@ -137,6 +136,9 @@ export class TypedText extends HTMLElement {
       if (!step.stopAfterwards && this.nextStep < this.steps.length) {
         this.setTimeout(() => this.type(), this.humanizedDelay);
       } else {
+        if (step.stopAfterwards) {
+          this.dispatchEvent(new CustomEvent(STOPPER_TYPED_EVENT_TYPE));
+        }
         this.stopTyping();
       }
     }, step.pauseDuration);

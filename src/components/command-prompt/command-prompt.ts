@@ -1,3 +1,5 @@
+import './command-prompt.scss';
+
 import { CommandOutput } from './command-prompt.types';
 import { getCommandModule } from './commands';
 import { CommandHistory } from './lib/command-history';

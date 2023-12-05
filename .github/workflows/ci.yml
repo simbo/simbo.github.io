@@ -29,18 +29,36 @@ jobs:
       - name: 📦 Install
         run: npm ci
 
-      - name: 🕵️ Lint
-        run: npm run lint
-
       - name: 🧑‍🏫 Check Format
         run: npm run format
 
-      - name: 👷‍♂️ Build
-        run: yarn run build
+      - name: 🕵️ Lint
+        run: npm run lint
 
-      - name: 🚚 Deploy
+      - name: 👷‍♂️ Build
+        run: npm run build
+
+      - name: 📦 Create Release Package
         if: ${{ github.event_name == 'push' && startsWith(github.event.ref, 'refs/tags/v') }}
-        uses: JamesIves/github-pages-deploy-action@v4
+        id: package
+        run: zip -r dist.zip dist
+
+      - name: 📋 Collect Changes
+        if: ${{ steps.package.outcome == 'success' }}
+        id: changes
+        uses: simbo/changes-between-tags-action@v1
+
+      - name: 🎁 Create GitHub Release
+        if: ${{ steps.package.outcome == 'success' }}
+        uses: ncipollo/release-action@v1
         with:
-          folder: dist
-          commit-message: Release ${{ github.ref_name }} from main @ ${{ github.sha }}
+          name: Release ${{ steps.changes.outputs.tag }}
+          body: ${{ steps.changes.outputs.changes }}
+          artifacts: dist.zip
+
+      # - name: 🚚 Deploy to GitHub Pages
+      #   if: ${{ steps.package.outcome == 'success' }}
+      #   uses: JamesIves/github-pages-deploy-action@v4
+      #   with:
+      #     folder: dist
+      #     commit-message: Release ${{ github.ref_name }} from main @ ${{ github.sha }}

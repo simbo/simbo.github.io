@@ -1,2 +1,0 @@
-import{C as e}from"./index-JVe8R7CI.js";const h={manpage:{description:"displays the current color theme or switches the color theme",examples:["color-theme","color-theme toggle","color-theme [light|dark]"]},async handler(t,{inputs:r}){const o=r.at(-1)?.toLocaleLowerCase();o==="toggle"?e.toggle():e.theme=o,t.outputText(`current color theme: ${e.theme}`)}};export{h as default};
-//# sourceMappingURL=color-theme-ZMKgMe9n.js.map

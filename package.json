@@ -14,6 +14,9 @@
   },
   "private": true,
   "type": "module",
+  "engines": {
+    "node": "^20"
+  },
   "scripts": {
     "browserslist": "browserslist",
     "build": "tsc && vite build",
@@ -27,24 +30,24 @@
     "preflight": "npm run lint && npm run format && npm run build",
     "preview": "vite preview",
     "start": "npm run dev",
-    "upgrade": "npx --yes npm-check-updates -u -t minor && npx --yes npm-check-updates --interactive --reject typescript,@types/node && npm i"
+    "upgrade": "npx --yes npm-check-updates -u -t minor --reject typescript && npx --yes npm-check-updates --interactive --reject typescript,@types/node && npm i"
   },
   "devDependencies": {
     "@ianvs/prettier-plugin-sort-imports": "^4.1.1",
-    "@types/node": "^18.18.9",
+    "@types/node": "^20",
     "@types/nunjucks": "^3.2.6",
-    "@typescript-eslint/eslint-plugin": "^6.11.0",
-    "@typescript-eslint/parser": "^6.11.0",
+    "@typescript-eslint/eslint-plugin": "^6.13.2",
+    "@typescript-eslint/parser": "^6.13.2",
     "autoprefixer": "^10.4.16",
     "cssnano": "^6.0.1",
-    "eslint": "^8.53.0",
-    "eslint-config-prettier": "^9.0.0",
+    "eslint": "^8.55.0",
+    "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-unicorn": "^49.0.0",
     "nunjucks": "^3.2.4",
     "prettier": "^3.1.0",
     "rollup-plugin-html-minifier": "^2.0.0",
     "sass": "^1.69.5",
-    "typescript": "^5.2.2",
-    "vite": "^5.0.0",
+    "typescript": "5.2.2",
+    "vite": "^5.0.5"
   }
 }

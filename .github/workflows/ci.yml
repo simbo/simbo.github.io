@@ -10,13 +10,15 @@ on:
     branches:
       - main
 
-permissions:
-  contents: write
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false
 
 jobs:
   ci:
     runs-on: ubuntu-22.04
-
+    permissions:
+      contents: write
     steps:
       - name: 🛎 Checkout
         uses: actions/checkout@v4
@@ -40,27 +42,26 @@ jobs:
       - name: 👷‍♂️ Build
         run: npm run build
 
-      - name: 📦 Create Release Package
-        if: ${{ github.event_name == 'push' && startsWith(github.event.ref, 'refs/tags/v') }}
-        id: package
-        run: zip -r dist.zip dist
-
       - name: 📋 Collect Changes
-        if: ${{ steps.package.outcome == 'success' }}
+        if: ${{ github.event_name == 'push' && startsWith(github.event.ref, 'refs/tags/v') }}
         id: changes
         uses: simbo/changes-between-tags-action@v1
 
+      - name: 📦 Create Release Package
+        if: ${{ steps.changes.outcome == 'success' }}
+        run: zip -r dist.zip dist
+
       - name: 🎁 Create GitHub Release
-        if: ${{ steps.package.outcome == 'success' }}
+        if: ${{ steps.changes.outcome == 'success' }}
         uses: ncipollo/release-action@v1
         with:
           name: Release ${{ steps.changes.outputs.tag }}
           body: ${{ steps.changes.outputs.changes }}
           artifacts: dist.zip
 
-      # - name: 🚚 Deploy to GitHub Pages
-      #   if: ${{ steps.package.outcome == 'success' }}
-      #   uses: JamesIves/github-pages-deploy-action@v4
-      #   with:
-      #     folder: dist
-      #     commit-message: Release ${{ github.ref_name }} from main @ ${{ github.sha }}
+      - name: 🚚 Deploy to GitHub Pages
+        if: ${{ steps.changes.outcome == 'success' }}
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: dist
+          commit-message: Release ${{ github.ref_name }} from ${{ github.sha }}

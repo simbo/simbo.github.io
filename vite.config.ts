@@ -4,7 +4,6 @@ import autoprefixer from 'autoprefixer';
 import cssnano from 'cssnano';
 import htmlMinifier from 'rollup-plugin-html-minifier';
 import { defineConfig, Plugin, splitVendorChunkPlugin, UserConfig } from 'vite';
-import svgLoader from 'vite-svg-loader';
 
 import packageJson from './package.json';
 import links from './src/content/links.json';
@@ -73,14 +72,7 @@ export default defineConfig(async ({ command }) => {
       }
     },
 
-    plugins: [
-      svgLoader({
-        defaultImport: 'raw',
-        svgo: false
-      }),
-      nunjucksPlugin({ locals: { ...globals, LINKS: links } }),
-      splitVendorChunkPlugin()
-    ],
+    plugins: [nunjucksPlugin({ locals: { ...globals, LINKS: links } }), splitVendorChunkPlugin()],
 
     define: Object.entries(globals).reduce((obj, [key, value]) => {
       if (['string', 'number', 'boolean'].includes(typeof value)) {

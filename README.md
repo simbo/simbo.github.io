@@ -19,4 +19,4 @@ See generated contents at the
 
 ## License and Author
 
-[MIT &copy; Simon Lepel](https://simbo.mit-license.org/2018/)
+[MIT &copy; 2018 Simon Lepel](https://simbo.mit-license.org/2018/)

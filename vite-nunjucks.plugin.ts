@@ -1,15 +1,13 @@
 import { readFile } from 'node:fs/promises';
-import { basename, resolve } from 'node:path';
-import { cwd } from 'node:process';
+import { basename, dirname, resolve as resolvePath } from 'node:path';
 
 import { ConfigureOptions, Environment } from 'nunjucks';
 import { HmrContext, IndexHtmlTransformContext, IndexHtmlTransformResult, Plugin } from 'vite';
 
 export interface NunjucksPluginOptions {
+  options: Partial<ConfigureOptions>;
   locals: object; // nunjucks template variables
 }
-
-const sourceBasePath = resolve(cwd(), 'src');
 
 const nunjucksOptions: ConfigureOptions = {
   autoescape: true,
@@ -19,27 +17,14 @@ const nunjucksOptions: ConfigureOptions = {
   trimBlocks: true
 };
 
-const nunjucksEnvironment = new Environment(
-  {
-    async: true,
-    getSource: (name, callback) => {
-      const path = resolve(sourceBasePath, name);
-      readFile(path)
-        .then(src => callback(undefined, { src: src.toString(), path, noCache: !!nunjucksOptions.noCache }))
-        .catch(error => (callback as (error: Error) => void)(error));
-    }
-  },
-  nunjucksOptions
-);
-
 export default (options: Partial<NunjucksPluginOptions> = {}): Plugin => {
   const locals: object = options.locals ?? {};
+  const sourcePaths: string[] = [];
   return {
     name: 'nunjucks',
     enforce: 'pre',
     handleHotUpdate: (context: HmrContext): void | [] => {
-      const filename = resolve(context.file);
-      if (!filename.startsWith(sourceBasePath)) return;
+      if (!sourcePaths.includes(context.file)) return;
       context.server.ws.send({ type: 'full-reload' });
       return [];
     },
@@ -47,14 +32,24 @@ export default (options: Partial<NunjucksPluginOptions> = {}): Plugin => {
       order: 'pre',
       handler: async (html: string, context: IndexHtmlTransformContext): Promise<IndexHtmlTransformResult | void> =>
         new Promise((resolve, reject) => {
-          nunjucksEnvironment.renderString(
-            html,
-            { ...locals, ...locals[basename(context.path)] },
-            (error, rendered) => {
-              if (error) reject(error);
-              else resolve(rendered as string);
-            }
-          );
+          new Environment(
+            {
+              async: true,
+              getSource: (name, callback) => {
+                const path = resolvePath(dirname(context.filename), name);
+                sourcePaths.push(path);
+                readFile(path)
+                  .then(src => {
+                    callback(undefined, { src: src.toString(), path, noCache: !!nunjucksOptions.noCache });
+                  })
+                  .catch(error => (callback as (error: Error) => void)(error));
+              }
+            },
+            nunjucksOptions
+          ).renderString(html, { ...locals, ...locals[basename(context.path)] }, (error, rendered) => {
+            if (error) reject(error);
+            else resolve(rendered as string);
+          });
         })
     }
   };

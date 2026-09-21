@@ -1,6 +1,6 @@
-# simbo.codes (simbo.github.io)
+# simbo.de (simbo.github.io)
 
-[![Uptime Ratio (last 30 days)](https://img.shields.io/uptimerobot/ratio/m777162478-e175ed9f7fd10f035bc5d20d)](https://simbo.codes/)
+[![Uptime Ratio (last 30 days)](https://img.shields.io/uptimerobot/ratio/m777162478-e175ed9f7fd10f035bc5d20d)](https://simbo.de/)
 [![Project Version](https://img.shields.io/github/package-json/version/simbo/simbo.github.io)](https://github.com/simbo/simbo.github.io/blob/main/package.json)
 [![Last Commit](https://img.shields.io/github/last-commit/simbo/simbo.github.io/main)](https://github.com/simbo/simbo.github.io/commits/main)
 [![Zero Dependencies](https://img.shields.io/badge/dependencies-zero-grass)](https://github.com/simbo/simbo.github.io/blob/main/package.json)
@@ -11,7 +11,7 @@
 My personal website.
 
 <div style="width: 100%;">
-  <a href="https://simbo.codes/" target="_blank"><img src="readme-button.svg" style="width: 100%;" alt="OWCC Documentation"></a>
+  <a href="https://simbo.de/" target="_blank"><img src="readme-button.svg" style="width: 100%;" alt="OWCC Documentation"></a>
 </div>
 
 See generated contents at the

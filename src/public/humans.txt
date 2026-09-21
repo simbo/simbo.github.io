@@ -3,7 +3,7 @@
 
 # TEAM
 Simon Lepel
-Site: https://simbo.codes/
+Site: https://simbo.de/
 GitHub: simbo
 npm: simbo
 BlueSky: @simbo23.bsky.social

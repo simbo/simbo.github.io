@@ -19,7 +19,7 @@ const AUTHOR_NAME = `${AUTHOR_FIRST_NAME} ${AUTHOR_LAST_NAME}`;
 const AUTHOR_USER = 'simbo';
 const SITE_TITLE = "Simbo's Website";
 const SITE_DESCRIPTION = `Personal Website of ${AUTHOR_NAME} alias ${AUTHOR_USER}`;
-const SITE_URL = 'https://simbo.codes/';
+const SITE_URL = 'https://simbo.de/';
 const SITE_LICENSE = `MIT © 2018 ${AUTHOR_NAME}`;
 
 // https://vitejs.dev/config/

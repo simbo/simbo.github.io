@@ -1,4 +1,4 @@
-# simbo.codes (simbo.github.io)
+# simbo.de (simbo.github.io)
 
 This is my personal website.
 

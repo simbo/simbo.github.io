@@ -1,6 +1,6 @@
 # simbo.de (simbo.github.io)
 
-This is my personal website.
+My personal website.
 
 Repository:
 [github.com/simbo/simbo.github.io](https://github.com/simbo/simbo.github.io)

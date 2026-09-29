@@ -1,0 +1,12 @@
+engineStrict: true
+
+verifyDepsBeforeRun: warn
+
+minimumReleaseAge: 2880
+
+minimumReleaseAgeExclude:
+  - '@simbo/*'
+
+allowBuilds:
+  '@parcel/watcher': true
+  esbuild: true

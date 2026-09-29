@@ -15,38 +15,42 @@
   "private": true,
   "type": "module",
   "engines": {
-    "node": "^20"
+    "node": "^24.15.0"
   },
+  "packageManager": "pnpm@12.8.1",
   "scripts": {
     "browserslist": "browserslist",
     "build": "tsc && vite build",
-    "bundle-analyzer": "npx --yes vite-bundle-visualizer",
+    "bundle-analyzer": "pnpx --yes vite-bundle-visualizer",
     "dev": "vite --no-clear-screen --host",
     "format:fix": "prettier --write .",
     "format": "prettier --check .",
     "lint:fix": "eslint -c .eslintrc.json --fix .",
     "lint": "eslint -c .eslintrc.json .",
-    "postinstall": "npx --yes update-browserslist-db@latest",
-    "preflight": "npm run lint && npm run format && npm run build",
+    "ncu:latest": "ncu --interactive --target latest --reject='/^(@types/node)$/'",
+    "ncu:minor": "ncu --interactive --target minor",
+    "ncu:patch": "ncu --interactive --target patch",
+    "postinstall": "pnpx --yes update-browserslist-db@latest",
+    "preflight": "pnpm run lint && pnpm run format && pnpm run build",
     "preview": "vite preview",
-    "start": "npm run dev",
-    "upgrade": "npx --yes npm-check-updates -u -t minor --reject typescript && npx --yes npm-check-updates --interactive --reject typescript,@types/node && npm i"
+    "start": "pnpm run dev"
   },
   "devDependencies": {
-    "@ianvs/prettier-plugin-sort-imports": "^4.1.1",
+    "@ianvs/prettier-plugin-sort-imports": "^4.7.1",
     "@types/node": "^20",
     "@types/nunjucks": "^3.2.6",
     "@typescript-eslint/eslint-plugin": "^6.13.2",
     "@typescript-eslint/parser": "^6.13.2",
-    "autoprefixer": "^10.4.16",
+    "autoprefixer": "^10.6.1",
     "cssnano": "^6.0.1",
     "eslint": "^8.55.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-unicorn": "^49.0.0",
+    "npm-check-updates": "^23.1.0",
     "nunjucks": "^3.2.4",
     "prettier": "^3.1.0",
     "rollup-plugin-html-minifier": "^2.0.0",
-    "sass": "^1.69.5",
+    "sass": "^1.105.0",
     "typescript": "5.2.2",
     "vite": "^5.0.5"
   }

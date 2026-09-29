@@ -1,0 +1,6 @@
+packageManager: pnpm
+reject:
+  - npm
+root: true
+install: never
+cooldown: 2

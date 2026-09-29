@@ -35,7 +35,12 @@
     ></script>
     {% endif %} {% endblock %}
   </head>
-  <body onload="document.documentElement.removeAttribute('style');document.body.removeAttribute('onload');">
+  <body
+    onload="
+      document.documentElement.removeAttribute('style');
+      document.body.removeAttribute('onload');
+    "
+  >
     {% block body %}{% endblock %}
   </body>
 </html>

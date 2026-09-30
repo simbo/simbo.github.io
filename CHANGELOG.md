@@ -1,5 +1,11 @@
 # simbo.github.io
 
+## 3.5.2
+
+### Patch Changes
+
+- f464ba8: fix scss var usage for prompt margin
+
 ## 3.5.1
 
 ### Patch Changes

@@ -88,7 +88,7 @@
 
   typed-text:not(:empty) + command-prompt,
   typed-text.has-cursor:empty + command-prompt {
-    margin-top: lines(1);
+    margin-top: vars.lines(1);
   }
 
   button {

@@ -1,0 +1,4 @@
+import: '@simbo/cspell-config'
+ignorePaths:
+  - ./src/public/robots.txt
+  - ./src/public/humans.txt

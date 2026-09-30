@@ -1,0 +1,17 @@
+import { configs, globals } from '@simbo/eslint-config';
+import { defineConfig, globalIgnores } from 'eslint/config';
+
+export default defineConfig([
+  globalIgnores(['**/dist/', '**/coverage/', '**/docs/']),
+  {
+    languageOptions: {
+      globals: { ...globals.node },
+      parserOptions: {
+        project: ['./tsconfig.node.json', './tsconfig.browser.json'],
+        tsconfigRootDir: import.meta.dirname,
+        allowDefaultProject: ['*.js', '.*.js']
+      }
+    },
+    extends: [configs.node.recommended]
+  }
+]) as unknown;

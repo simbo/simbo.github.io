@@ -11,7 +11,7 @@
 My personal website.
 
 <div style="width: 100%;">
-  <a href="https://simbo.de/" target="_blank"><img src="readme-button.svg" style="width: 100%;" alt="OWCC Documentation"></a>
+  <a href="https://simbo.de/" target="_blank"><img src="readme-button.svg" style="width: 100%;"></a>
 </div>
 
 See generated contents at the

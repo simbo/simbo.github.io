@@ -7,11 +7,9 @@ import { defineConfig, Plugin, splitVendorChunkPlugin, UserConfig } from 'vite';
 
 import packageJson from './package.json';
 import links from './src/content/links.json';
-import nunjucksPlugin from './vite-nunjucks.plugin';
+import nunjucksPlugin from './vite-nunjucks.plugin.js';
 
-interface Globals {
-  [key: string]: string | boolean | number;
-}
+type Globals = Record<string, string | boolean | number>;
 
 const AUTHOR_FIRST_NAME = 'Simon';
 const AUTHOR_LAST_NAME = 'Lepel';
@@ -25,10 +23,11 @@ const SITE_LICENSE = `MIT © 2018 ${AUTHOR_NAME}`;
 // https://vitejs.dev/config/
 export default defineConfig(async ({ command }) => {
   const mode = command === 'build' ? 'production' : 'development';
+  const date = new Date();
 
   const globals: Globals = {
     SITE_VERSION: packageJson.version,
-    SITE_LAST_BUILD: new Date().toUTCString(),
+    SITE_LAST_BUILD: date.toUTCString(),
     SITE_IS_PROD: mode === 'production',
     SITE_IS_DEV: mode === 'development',
     SITE_TITLE,

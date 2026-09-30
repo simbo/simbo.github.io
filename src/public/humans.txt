@@ -7,7 +7,6 @@ Site: https://simbo.de/
 GitHub: simbo
 npm: simbo
 BlueSky: @simbo23.bsky.social
-Twitter: @simbo23
 Location: Germany
 
 # SITE

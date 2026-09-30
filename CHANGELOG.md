@@ -1,5 +1,44 @@
 # simbo.github.io
 
+## 3.5.0
+
+### Minor Changes
+
+- 33fcb6b: Introduce Changesets-based release automation and replace the
+  existing CI workflow with dedicated checks, release, and publish workflows:
+
+  - Run checks and builds for pull requests and pushes to `main`, require
+    changesets for non-draft pull requests, and trigger releases after
+    successful checks when changesets are present.
+  - Verify the checked commit before integrating changesets, updating the
+    version and changelog, and pushing a release commit and tag using the GitHub
+    App identity.
+  - Build tagged releases, validate their version against `package.json`,
+    extract release notes from the changelog, create a ZIP archive and GitHub
+    release, and deploy the website to GitHub Pages using the GitHub App
+    identity.
+  - Support manual releases and publishing existing version tags for rollbacks,
+    and serialize release and publish runs.
+  - Add Changesets configuration and a changelog covering previous releases.
+
+### Patch Changes
+
+- 33fcb6b: Update project tooling and dependencies, and clean up the website:
+
+  - Remove the Twitter link and clean up `humans.txt`.
+  - Correct the version entry in `package.json`.
+  - Upgrade Node.js to v24, switch to pnpm, and add npm-check-updates.
+  - Upgrade Vite and update its configuration, replace the HTML minifier with
+    html-minifier-terser and a custom plugin, and extract content data into a
+    separate file.
+  - Upgrade ESLint, Prettier, and TypeScript, adopt shared configurations, and
+    add spell checking with CSpell.
+  - Add commitlint and Husky, and update Node.js type definitions.
+  - Reorganize package scripts, simplify JSON handling and TypeScript
+    configurations, and clean up SCSS imports.
+  - Update EditorConfig, move the VS Code workspace file out of the project
+    root, improve code comments, and fix linting issues.
+
 ## 3.4.0
 
 ### Minor Changes

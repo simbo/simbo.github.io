@@ -1,0 +1,2 @@
+import{t as e}from"./resize-terminal-view-uYTW_YFG.js";var t={manpage:`minimizes the terminal view`,handler(t){t.outputText(e(`min`)?`terminal view minimized`:`terminal view is already minimized`)}};export{t as default};
+//# sourceMappingURL=minimize-CxRMKxtT.js.map

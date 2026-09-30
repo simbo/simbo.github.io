@@ -1,0 +1,2 @@
+function e(e){if(globalThis.matchMedia(`(max-width: 550px)`).matches)throw Error(`sorry, the terminal view can not be resized on small viewports`);return e===`max`?!globalThis.document.documentElement.classList.contains(`terminal-maximized`)&&(globalThis.document.documentElement.classList.add(`terminal-maximized`),!0):globalThis.document.documentElement.classList.contains(`terminal-maximized`)?(globalThis.document.documentElement.classList.remove(`terminal-maximized`),!0):!1}export{e as t};
+//# sourceMappingURL=resize-terminal-view-uYTW_YFG.js.map

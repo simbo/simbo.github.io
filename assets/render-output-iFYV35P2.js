@@ -1,0 +1,2 @@
+function e(e,n){if(!e||e.length===0)return;e=Array.isArray(e)?e:[e];let r=t(`usage`,`<br>${e.map(e=>`  <span class="yellow">${e}</span>`).join(`<br>`)}`);return n?n(r):r}function t(e,t){return`<span class="dim">${e}:</span>${t}`}export{e as n,t};
+//# sourceMappingURL=render-output-iFYV35P2.js.map

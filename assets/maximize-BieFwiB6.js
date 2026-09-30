@@ -1,0 +1,2 @@
+import{t as e}from"./resize-terminal-view-uYTW_YFG.js";var t={manpage:`maximizes the terminal view`,handler(t){t.outputText(e(`max`)?`terminal view maximized`:`terminal view is already maximized`)}};export{t as default};
+//# sourceMappingURL=maximize-BieFwiB6.js.map

@@ -1,0 +1,2 @@
+var e={"&":`&amp;`,"<":`&lt;`,">":`&gt;`};function t(t){return t.replaceAll(/[&<>]/g,t=>e[t])}var n={manpage:`outputs inputs`,handler(e,n){let r=n.inputs;e.outputText(r.map(e=>t(e)).join(` `))}};export{n as default};
+//# sourceMappingURL=echo-Da0GiUB8.js.map

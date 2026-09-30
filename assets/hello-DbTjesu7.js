@@ -1,0 +1,2 @@
+var e=[`Hello`,`Hallo`,`Servus`,`Salut`,`Ciao`,`Hej`,`Hola`,`Cześć`,`Olá`],t=0,n={manpage:`says "hello" in different languages`,handler(n){let r=t++===0?0:Math.round(Math.random()*(e.length-1));n.outputText(`${e[r]}!`)}};export{n as default};
+//# sourceMappingURL=hello-DbTjesu7.js.map

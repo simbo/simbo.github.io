@@ -1,0 +1,2 @@
+import{t as e}from"./color-theme-JKu1zwdI.js";var t={manpage:{description:`displays the current color theme or switches the color theme`,examples:[`color-theme`,`color-theme toggle`,`color-theme [light|dark]`]},handler(t,{inputs:n}){let r=n.at(-1)?.toLocaleLowerCase();r===`toggle`?e.toggle():e.theme=r,t.outputText(`current color theme: ${e.theme}`)}};export{t as default};
+//# sourceMappingURL=color-theme-B69-pNIa.js.map

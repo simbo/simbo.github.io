@@ -1,0 +1,2 @@
+var e={manpage:{description:`empties the terminal view, otionally including the typed-text container`,examples:[`clear`,`clear -a`,`clear --all`,`clear all`]},handler(e,{options:t,inputs:n}){e.clearOutput(),(t.a||t.all||n.includes(`all`))&&globalThis.document.querySelector(`typed-text`).resetTyping()}};export{e as default};
+//# sourceMappingURL=clear-Dpir2VDt.js.map

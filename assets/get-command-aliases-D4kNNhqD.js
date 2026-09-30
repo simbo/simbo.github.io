@@ -1,0 +1,2 @@
+import{t as e}from"./commands-DmlhQo9l.js";function t(t){return t=e[t]||t,Object.entries(e).reduce((e,[n,r])=>(t===r&&e.push(n),e),[])}export{t};
+//# sourceMappingURL=get-command-aliases-D4kNNhqD.js.map

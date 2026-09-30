@@ -1,0 +1,35 @@
+@use 'extendables';
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  @extend %visually-hidden;
+}
+
+.main {
+  flex: 1 0 auto;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  .terminal-maximized & {
+    justify-content: flex-start;
+  }
+
+  @media screen and (max-width: 767px) {
+    justify-content: flex-start;
+  }
+}
+
+// before component is loaded
+command-prompt {
+  display: block;
+  &:empty::before {
+    content: '❯';
+  }
+}

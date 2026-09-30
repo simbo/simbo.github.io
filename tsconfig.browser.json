@@ -3,8 +3,6 @@
   "extends": "@simbo/tsconfig/browser",
   "include": ["src"],
   "compilerOptions": {
-    "allowImportingTsExtensions": true,
-    "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
     "declaration": false

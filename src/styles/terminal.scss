@@ -1,3 +1,6 @@
+@use 'vars';
+@use 'extendables';
+
 .terminal {
   @extend %font--mono, %material-shadow--2;
   display: block;
@@ -7,8 +10,8 @@
   margin: 2rem auto;
   padding: 2rem;
   background: var(--foreground-color);
-  border: remPx(1) solid var(--border-color);
-  border-radius: remPx(3);
+  border: vars.remPx(1) solid var(--border-color);
+  border-radius: vars.remPx(3);
   font-size: 1.2em;
   white-space: pre-wrap;
   align-self: flex-start;
@@ -18,7 +21,7 @@
     margin-top: 0;
     border-radius: 0;
     width: 100%;
-    border-width: 0 0 remPx(1) 0;
+    border-width: 0 0 vars.remPx(1) 0;
   }
 
   @media screen and (max-width: 550px) {
@@ -26,7 +29,7 @@
     margin-top: 0;
     border-radius: 0;
     width: 100%;
-    border-width: 0 0 remPx(1) 0;
+    border-width: 0 0 vars.remPx(1) 0;
   }
 
   @media screen and (max-width: 500px) {
@@ -51,7 +54,7 @@
     background: url('/simbo-avatar-tiny.png') center center no-repeat;
     background-size: contain;
     border-radius: 50%;
-    border: remPx(1) solid var(--border-color);
+    border: vars.remPx(1) solid var(--border-color);
     transform: translate(23%, -23%);
 
     .terminal-maximized & {

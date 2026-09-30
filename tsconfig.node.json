@@ -1,8 +1,11 @@
 {
   "$schema": "https://json.schemastore.org/tsconfig",
   "extends": "@simbo/tsconfig/node",
-  "include": ["eslint.config.ts", "vite.config.ts", "vite-nunjucks.plugin.ts"],
-  "compilerOptions": {
-    "resolveJsonModule": true
-  }
+  "include": [
+    "./eslint.config.ts",
+    "./vite.config.ts",
+    "./vite-content.ts",
+    "./vite-nunjucks.plugin.ts",
+    "./vite-html-minifier.plugin.ts"
+  ]
 }

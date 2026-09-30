@@ -1,7 +1,9 @@
+@use 'vars';
+
 .footer {
   position: relative;
   padding: 1rem;
-  font-size: $font-size--small;
+  font-size: vars.$font-size--small;
   color: var(--secondary-color);
 
   color-theme-toggle {

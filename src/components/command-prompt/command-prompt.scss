@@ -1,12 +1,12 @@
-@import '../../styles/variables.scss';
-@import '../../styles/extendables.scss';
+@use 'vars';
+@use 'extendables';
 
 command-prompt {
   display: block;
 
   .output {
     position: relative;
-    min-height: lines(1);
+    min-height: vars.lines(1);
     word-break: break-word;
 
     &.is-command {
@@ -31,11 +31,11 @@ command-prompt {
   }
 
   .output + .output.is-command {
-    margin-top: lines(1);
+    margin-top: vars.lines(1);
   }
 
   .outputs:not(:empty) + .prompt {
-    margin-top: lines(1);
+    margin-top: vars.lines(1);
   }
 
   .prompt {

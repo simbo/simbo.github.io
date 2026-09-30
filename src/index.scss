@@ -1,45 +1,10 @@
-@import './styles/variables.scss';
-@import './styles/color-theme.scss';
-@import './styles/extendables.scss';
-@import './styles/base.scss';
+@use 'color-theme';
+@use 'base';
 
-@import './components/svg-icon/svg-icon.scss';
-@import './components/typed-text/typed-text.scss';
-@import './components/color-theme-toggle/color-theme-toggle.scss';
+@use './components/svg-icon/svg-icon';
+@use './components/typed-text/typed-text';
+@use './components/color-theme-toggle/color-theme-toggle';
 
-body {
-  display: flex;
-  flex-direction: column;
-}
-
-.header {
-  @extend %visually-hidden;
-}
-
-.main {
-  flex: 1 0 auto;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-
-  .terminal-maximized & {
-    justify-content: flex-start;
-  }
-
-  @media screen and (max-width: 767px) {
-    justify-content: flex-start;
-  }
-}
-
-// before component is loaded
-command-prompt {
-  display: block;
-  &:empty::before {
-    content: '❯';
-  }
-}
-
-@import './styles/terminal.scss';
-@import './styles/footer.scss';
+@use 'layout';
+@use 'terminal';
+@use 'footer';

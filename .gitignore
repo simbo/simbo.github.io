@@ -6,6 +6,5 @@ npm-debug.log*
 
 /.vscode/*
 !/.vscode/settings.json
-/*.code-workspace
 
 .DS_Store

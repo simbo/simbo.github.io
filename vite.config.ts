@@ -1,12 +1,10 @@
 import { fileURLToPath } from 'node:url';
 
 import autoprefixer from 'autoprefixer';
-import cssnano from 'cssnano';
-import htmlMinifier from 'rollup-plugin-html-minifier';
-import { defineConfig, Plugin, splitVendorChunkPlugin, UserConfig } from 'vite';
+import { defineConfig, type UserConfig } from 'vite';
 
-import packageJson from './package.json';
-import links from './src/content/links.json';
+import { links, packageJson } from './vite-content.js';
+import { htmlMinifierPlugin } from './vite-html-minifier.plugin.js';
 import nunjucksPlugin from './vite-nunjucks.plugin.js';
 
 type Globals = Record<string, string | boolean | number>;
@@ -21,12 +19,12 @@ const SITE_URL = 'https://simbo.de/';
 const SITE_LICENSE = `MIT © 2018 ${AUTHOR_NAME}`;
 
 // https://vitejs.dev/config/
-export default defineConfig(async ({ command }) => {
+export default defineConfig(({ command }) => {
   const mode = command === 'build' ? 'production' : 'development';
   const date = new Date();
 
   const globals: Globals = {
-    SITE_VERSION: packageJson.version,
+    SITE_VERSION: packageJson.version ?? 'N/A',
     SITE_LAST_BUILD: date.toUTCString(),
     SITE_IS_PROD: mode === 'production',
     SITE_IS_DEV: mode === 'development',
@@ -53,43 +51,38 @@ export default defineConfig(async ({ command }) => {
       emptyOutDir: true,
       target: 'es2022',
       sourcemap: true,
-      rollupOptions: {
+      rolldownOptions: {
+        output: {
+          codeSplitting: {
+            groups: [{ name: 'vendor', test: /[\\/]node_modules[\\/]/ }]
+          }
+        },
         input: {
           index: fileURLToPath(new URL('src/index.html', import.meta.url))
           // foo: fileURLToPath(new URL('src/foo.html', import.meta.url)) // another page
-        },
-        plugins: [
-          htmlMinifier({
-            options: {
-              collapseWhitespace: true,
-              conservativeCollapse: true,
-              preserveLineBreaks: true,
-              removeComments: true
-            }
-          }) as unknown as Plugin
-        ]
+        }
       }
     },
 
-    plugins: [nunjucksPlugin({ locals: { ...globals, LINKS: links } }), splitVendorChunkPlugin()],
+    plugins: [nunjucksPlugin({ locals: { ...globals, LINKS: links } }), htmlMinifierPlugin()],
 
-    define: Object.entries(globals).reduce((obj, [key, value]) => {
+    define: Object.entries(globals).reduce<Globals>((obj, [key, value]) => {
       if (['string', 'number', 'boolean'].includes(typeof value)) {
         obj[key] = JSON.stringify(value);
       }
       return obj;
-    }, {} as Globals),
+    }, {}),
 
     css: {
       preprocessorOptions: {
-        sass: {
-          style: 'expanded',
-          sourceMap: true
+        scss: {
+          loadPaths: [fileURLToPath(new URL('src/styles', import.meta.url))],
+          style: 'expanded'
         }
       },
       transformer: 'postcss',
       postcss: {
-        plugins: [autoprefixer({ remove: false }), cssnano({ preset: ['default', { zindex: false }] })]
+        plugins: [autoprefixer({ remove: false })]
       },
       devSourcemap: true
     }

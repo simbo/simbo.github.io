@@ -1,4 +1,4 @@
-import { CommandModule } from '../command-prompt.types';
+import type { CommandModule } from '../command-prompt.types.js';
 
 const colorsModule: CommandModule = {
   manpage: 'displays examples for text colors',

@@ -4,10 +4,10 @@ export class CommandHistory {
   private readonly history: string[];
   private index = -1;
 
-  constructor() {
+  public constructor() {
     let history: string[];
     try {
-      history = JSON.parse(window.localStorage.getItem(COMMAND_HISTORY_STORAGE_KEY) || '[]');
+      history = JSON.parse(globalThis.localStorage.getItem(COMMAND_HISTORY_STORAGE_KEY) ?? '[]') as string[];
     } catch {
       history = [];
     }
@@ -17,10 +17,13 @@ export class CommandHistory {
   public add(command: string): void {
     this.index = -1;
     command = command.trim();
-    if (this.history[0] !== command) {
-      this.history.unshift(command);
-      window.localStorage.setItem(COMMAND_HISTORY_STORAGE_KEY, JSON.stringify(this.history));
+    if (this.history[0] === command) {
+      return;
     }
+
+    // eslint-disable-next-line unicorn/no-array-front-mutation
+    this.history.unshift(command);
+    globalThis.localStorage.setItem(COMMAND_HISTORY_STORAGE_KEY, JSON.stringify(this.history));
   }
 
   public backward(): string | undefined {
@@ -28,6 +31,7 @@ export class CommandHistory {
       this.index++;
       return this.history[this.index];
     }
+    return undefined;
   }
 
   public forward(): string | undefined {
@@ -35,5 +39,6 @@ export class CommandHistory {
       this.index--;
       return this.index === -1 ? '' : this.history[this.index];
     }
+    return undefined;
   }
 }

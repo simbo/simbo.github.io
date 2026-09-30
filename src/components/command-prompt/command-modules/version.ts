@@ -1,4 +1,4 @@
-import { CommandModule } from '../command-prompt.types';
+import type { CommandModule } from '../command-prompt.types.js';
 
 const versionModule: CommandModule = {
   manpage: 'displays project version',

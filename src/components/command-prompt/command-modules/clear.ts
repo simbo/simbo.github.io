@@ -1,15 +1,15 @@
-import { TypedText } from '../../typed-text/typed-text';
-import { CommandModule } from '../command-prompt.types';
+import type { TypedText } from '../../typed-text/typed-text.js';
+import type { CommandModule } from '../command-prompt.types.js';
 
 const clearModule: CommandModule = {
   manpage: {
     description: 'empties the terminal view, otionally including the typed-text container',
     examples: ['clear', 'clear -a', 'clear --all', 'clear all']
   },
-  async handler(prompt, { options, inputs }) {
+  handler(prompt, { options, inputs }) {
     prompt.clearOutput();
     if (options.a || options.all || inputs.includes('all')) {
-      (document.querySelector('typed-text') as TypedText).resetTyping();
+      (globalThis.document.querySelector('typed-text') as TypedText).resetTyping();
     }
   }
 };

@@ -1,10 +1,10 @@
-import { CommandModule } from '../command-prompt.types';
-import { resizeTerminalView } from '../lib/resize-terminal-view';
+import type { CommandModule } from '../command-prompt.types.js';
+import { resizeTerminalView } from '../lib/resize-terminal-view.js';
 
 const minimizeModule: CommandModule = {
   manpage: 'minimizes the terminal view',
 
-  async handler(prompt) {
+  handler(prompt) {
     prompt.outputText(resizeTerminalView('min') ? 'terminal view minimized' : 'terminal view is already minimized');
   }
 };

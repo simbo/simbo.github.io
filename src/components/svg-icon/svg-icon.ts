@@ -14,18 +14,23 @@ export class SvgIcon extends HTMLElement {
     }
   }
 
-  private setIcon(iconName: string) {
+  private setIcon(iconName: string): void {
     if (typeof iconName !== 'string' || iconName.length === 0) {
       return;
     }
-    this.getIcon(iconName).then(svg => {
-      this.innerHTML = svg;
-    });
+    this.getIcon(iconName)
+      .then(svg => {
+        // eslint-disable-next-line unicorn/no-unsafe-dom-html -- SVG markup comes from local icon modules maintained in this repository.
+        this.innerHTML = svg;
+      })
+      .catch((error: unknown) => {
+        console.error(error);
+      });
   }
 
   private async getIcon(iconName: string): Promise<string> {
     if (!SVG_ICON_CACHE.has(iconName)) {
-      const { default: importedIcon } = await import(`./svg-icons/${iconName}.ts`);
+      const { default: importedIcon } = (await import(`./svg-icons/${iconName}.ts`)) as { default: string };
       SVG_ICON_CACHE.set(iconName, importedIcon);
     }
     const icon = SVG_ICON_CACHE.get(iconName) as string;

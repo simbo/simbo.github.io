@@ -1,9 +1,9 @@
-import { CommandModule } from './command-prompt.types';
+import type { CommandModule } from './command-prompt.types.js';
 
 const COMMAND_MODULES_CACHE = new Map<string, CommandModule>();
 
 /**
- * these commands will show up in public listings like `commands`
+ * Command names shown in public listings, including the `commands` output.
  */
 export const PUBLIC_COMMANDS = [
   'clear',
@@ -22,9 +22,9 @@ export const PUBLIC_COMMANDS = [
 ];
 
 /**
- * aliases for commands
+ * Maps shorthand command names to their canonical command names.
  */
-export const COMMAND_ALIASES: { [alias: string]: string } = {
+export const COMMAND_ALIASES: Record<string, string> = {
   cls: 'clear',
   hey: 'hello',
   hi: 'hello',
@@ -35,23 +35,25 @@ export const COMMAND_ALIASES: { [alias: string]: string } = {
 };
 
 /**
- * builtin commands are not lazy-loaded
+ * Built-in command modules that can be returned without a dynamic import.
  */
-const BUILTIN_COMMAND_MODULES: { [command: string]: CommandModule } = {
+const BUILTIN_COMMAND_MODULES: Record<string, CommandModule | undefined> = {
   foo: { handler: 'bar' },
   test: { handler: 'test passed.' }
 };
 
 /**
- * regexp for valid command names
+ * Accepts alphanumeric command names with optional hyphen-separated segments.
  */
 const RX_COMMAND = /^[a-z][\da-z]*(-[a-z][\da-z]*)*$/i;
 
 /**
- * return a command module for a command name
- * - from builtin modules
- * - from cached modules
- * - try to load and import the module
+ * Resolves a command name or alias to its module.
+ * Built-in modules are returned directly; other modules are loaded on demand and cached.
+ *
+ * @param command - Command name or alias; matching is case-insensitive.
+ * @returns The resolved module containing the command handler and optional manual page.
+ * @throws {Error} When the command name is invalid or its module cannot be loaded.
  */
 export async function getCommandModule(command: string): Promise<CommandModule> {
   if (!RX_COMMAND.test(command)) {
@@ -60,12 +62,12 @@ export async function getCommandModule(command: string): Promise<CommandModule> 
   command = command.toLowerCase();
   command = COMMAND_ALIASES[command] || command;
   if (BUILTIN_COMMAND_MODULES[command]) {
-    return BUILTIN_COMMAND_MODULES[command];
+    return BUILTIN_COMMAND_MODULES[command] as CommandModule;
   }
   if (!COMMAND_MODULES_CACHE.has(command)) {
     let module: CommandModule;
     try {
-      module = (await import(`./command-modules/${command}.ts`)).default;
+      module = ((await import(`./command-modules/${command}.ts`)) as { default: CommandModule }).default;
     } catch {
       throw new Error(`unknown command: ${command}`);
     }

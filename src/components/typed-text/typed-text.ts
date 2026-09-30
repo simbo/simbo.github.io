@@ -1,4 +1,4 @@
-import { STARTED_TYPING_EVENT_TYPE, STOPPED_TYPING_EVENT_TYPE, STOPPER_TYPED_EVENT_TYPE } from './typed-text-events';
+import { STARTED_TYPING_EVENT_TYPE, STOPPED_TYPING_EVENT_TYPE, STOPPER_TYPED_EVENT_TYPE } from './typed-text-events.js';
 
 interface Step {
   pauseDuration: number;
@@ -16,7 +16,7 @@ const RX_BREAK = /^<br\s*\/?>/i;
 
 export class TypedText extends HTMLElement {
   // queue of text/html strings to set as innerHtml
-  private steps: Step[] = [];
+  private readonly steps: Step[] = [];
 
   // next output queue index
   private nextStep = 0;
@@ -31,8 +31,20 @@ export class TypedText extends HTMLElement {
     super();
   }
 
+  public get isTyping(): boolean {
+    return this.typeTimeout !== 0;
+  }
+
+  public get typingDone(): boolean {
+    return this.steps.length === this.nextStep;
+  }
+
+  private get humanizedDelay(): number {
+    return (Math.random() * this.typeDelay - Math.random() * this.typeDelay) / 2 + this.typeDelay;
+  }
+
   public connectedCallback(): void {
-    this.typeDelay = Number.parseInt(this.getAttribute('type-delay') || '0', 10) || DEFAULT_TYPE_DELAY;
+    this.typeDelay = Math.trunc(Number(this.getAttribute('type-delay'))) || DEFAULT_TYPE_DELAY;
     // const content = this.innerHTML;
     // this.innerHTML = '';
     // this.queueContent(content);
@@ -54,7 +66,7 @@ export class TypedText extends HTMLElement {
   public resetTyping(): void {
     this.stopTyping();
     this.nextStep = 0;
-    this.innerHTML = '';
+    this.replaceChildren();
   }
 
   public restartTyping(): void {
@@ -62,22 +74,14 @@ export class TypedText extends HTMLElement {
     this.startTyping();
   }
 
-  public get isTyping(): boolean {
-    return this.typeTimeout !== 0;
-  }
-
-  public get typingDone(): boolean {
-    return this.steps.length === this.nextStep;
-  }
-
   public queueContent(content: string): void {
     content = content
       .split(/[\n\r]+/g)
       .map(line => line.trim())
       .join('')
-      .replaceAll(RX_CODE_SPAN, (_match, code) => `^${code}`);
+      .replaceAll(RX_CODE_SPAN, (_match, code: string) => `^${code}`);
 
-    let output = this.steps.at(-1)?.output || '';
+    let output = this.steps.at(-1)?.output ?? '';
     let pauseDuration = 0;
     let stopAfterwards = false;
 
@@ -90,7 +94,7 @@ export class TypedText extends HTMLElement {
       shiftContent(length);
     };
 
-    const addStep = () => {
+    const addStep = (): void => {
       const step: Step = { pauseDuration, output };
       if (stopAfterwards) {
         step.stopAfterwards = stopAfterwards;
@@ -102,18 +106,21 @@ export class TypedText extends HTMLElement {
 
     while (content.length > 0) {
       const nextChar = content.charAt(0);
-      let codeMatch: RegExpMatchArray | null = null;
       let delimiterPosition: number;
-      if (nextChar === '^' && (codeMatch = content.match(RX_CODE))) {
+      if (nextChar === '^') {
+        const codeMatch: RegExpExecArray | null = RX_CODE.exec(content);
+        if (!codeMatch) {
+          return;
+        }
         if (codeMatch[0].toLowerCase() === '^stop') {
           stopAfterwards = true;
         } else {
-          pauseDuration += Number.parseInt(codeMatch[0].slice(1), 10);
+          pauseDuration += Number(codeMatch[0].slice(1));
         }
         shiftContent(codeMatch[0].length);
       } else if (nextChar === '<') {
-        let breakMatch: RegExpMatchArray | null = null;
-        if ((breakMatch = content.match(RX_BREAK))) {
+        const breakMatch: RegExpMatchArray | null = RX_BREAK.exec(content);
+        if (breakMatch) {
           shiftToOutput(breakMatch[0].length);
           addStep();
         } else if ((delimiterPosition = content.indexOf('>')) >= 0) {
@@ -131,10 +138,13 @@ export class TypedText extends HTMLElement {
   private type(): void {
     const step = this.steps[this.nextStep];
     this.setTimeout(() => {
+      // eslint-disable-next-line unicorn/no-unsafe-dom-html -- Animation steps intentionally render HTML; queueContent must receive trusted markup only.
       this.innerHTML = step.output;
       this.nextStep++;
       if (!step.stopAfterwards && this.nextStep < this.steps.length) {
-        this.setTimeout(() => this.type(), this.humanizedDelay);
+        this.setTimeout(() => {
+          this.type();
+        }, this.humanizedDelay);
       } else {
         if (step.stopAfterwards) {
           this.dispatchEvent(new CustomEvent(STOPPER_TYPED_EVENT_TYPE));
@@ -144,18 +154,16 @@ export class TypedText extends HTMLElement {
     }, step.pauseDuration);
   }
 
-  private get humanizedDelay(): number {
-    return (Math.random() * this.typeDelay - Math.random() * this.typeDelay) / 2 + this.typeDelay;
-  }
-
   private setTimeout(callback: () => void, duration = 0): void {
-    this.typeTimeout = window.setTimeout(callback, duration);
+    this.typeTimeout = globalThis.setTimeout(callback, duration);
   }
 
   private clearTimeout(): void {
-    if (this.typeTimeout) {
-      window.clearTimeout(this.typeTimeout);
-      this.typeTimeout = 0;
+    if (!this.typeTimeout) {
+      return;
     }
+
+    globalThis.clearTimeout(this.typeTimeout);
+    this.typeTimeout = 0;
   }
 }

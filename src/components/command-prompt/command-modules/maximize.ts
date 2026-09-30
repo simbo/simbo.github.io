@@ -1,10 +1,10 @@
-import { CommandModule } from '../command-prompt.types';
-import { resizeTerminalView } from '../lib/resize-terminal-view';
+import type { CommandModule } from '../command-prompt.types.js';
+import { resizeTerminalView } from '../lib/resize-terminal-view.js';
 
 const maximizeModule: CommandModule = {
   manpage: 'maximizes the terminal view',
 
-  async handler(prompt) {
+  handler(prompt) {
     prompt.outputText(resizeTerminalView('max') ? 'terminal view maximized' : 'terminal view is already maximized');
   }
 };

@@ -1,24 +1,28 @@
 import './command-prompt.scss';
 
-import { CommandOutput } from './command-prompt.types';
-import { getCommandModule } from './commands';
-import { CommandHistory } from './lib/command-history';
-import { parseParameters } from './lib/parse-parameters';
+import type { CommandOutput } from './command-prompt.types.js';
+import { getCommandModule } from './commands.js';
+import { CommandHistory } from './lib/command-history.js';
+import { parseParameters } from './lib/parse-parameters.js';
 
 const COMMAND_IN_PROGRESS_CLASSNAME = 'command-in-progress';
 
 let ID_COUNTER = 0;
 
 export class CommandPrompt extends HTMLElement {
-  private readonly outputsElement = document.createElement('div');
-  private readonly promptElement = document.createElement('div');
-  private readonly labelElement = document.createElement('label');
-  private readonly inputElement = document.createElement('input');
+  private readonly outputsElement = globalThis.document.createElement('div');
+  private readonly promptElement = globalThis.document.createElement('div');
+  private readonly labelElement = globalThis.document.createElement('label');
+  private readonly inputElement = globalThis.document.createElement('input');
   private readonly history = new CommandHistory();
   private readonly inputId = `prompt-input${++ID_COUNTER}`;
 
   public constructor() {
     super();
+  }
+
+  public get commandIsInProgress(): boolean {
+    return this.classList.contains(COMMAND_IN_PROGRESS_CLASSNAME);
   }
 
   public connectedCallback(): void {
@@ -30,8 +34,12 @@ export class CommandPrompt extends HTMLElement {
     this.inputElement.classList.add('prompt-input');
     this.inputElement.id = this.inputId;
     this.inputElement.type = 'text';
-    this.inputElement.addEventListener('keypress', event => this.onPromptKeyPress(event));
-    this.inputElement.addEventListener('keydown', event => this.onPromptKeyDown(event));
+    this.inputElement.addEventListener('keypress', event => {
+      this.onPromptKeyPress(event);
+    });
+    this.inputElement.addEventListener('keydown', event => {
+      this.onPromptKeyDown(event);
+    });
 
     this.append(this.outputsElement);
     this.promptElement.append(this.labelElement);
@@ -39,28 +47,25 @@ export class CommandPrompt extends HTMLElement {
     this.append(this.promptElement);
   }
 
-  public outputText(content: string) {
+  public outputText(content: string): void {
     this.addOutput({ type: 'text', content });
   }
 
-  public outputError(error: Error | string) {
-    this.addOutput({ type: 'error', content: `${(error as Error).message || error}` });
+  public outputError(error: unknown): void {
+    this.addOutput({ type: 'error', content: String((error as Error).message || error) });
   }
 
-  public clearOutput() {
-    this.outputsElement.innerHTML = '';
-  }
-
-  public get commandIsInProgress(): boolean {
-    return this.classList.contains(COMMAND_IN_PROGRESS_CLASSNAME);
+  public clearOutput(): void {
+    this.outputsElement.replaceChildren();
   }
 
   private addOutput({ type, content }: CommandOutput): void {
-    const outputElement = document.createElement('div');
+    const outputElement = globalThis.document.createElement('div');
     outputElement.classList.add('output', `is-${type}`);
+    // eslint-disable-next-line unicorn/no-unsafe-dom-html -- Command output intentionally renders HTML; command handlers must escape user input.
     if (type === 'text') outputElement.innerHTML = content;
     else if (type === 'command') {
-      const command = document.createElement('span');
+      const command = globalThis.document.createElement('span');
       command.classList.add('command-input');
       command.textContent = content;
       outputElement.append(command);
@@ -70,29 +75,29 @@ export class CommandPrompt extends HTMLElement {
   }
 
   private onPromptKeyPress(event: KeyboardEvent): void {
-    if (event.key === 'Enter') {
-      event.preventDefault();
-      if (!this.commandIsInProgress) {
-        const command = this.inputElement.value;
-        this.inputElement.value = '';
-        this.parseInput(command);
-      }
+    if (event.key !== 'Enter') {
+      return;
     }
+
+    event.preventDefault();
+    if (this.commandIsInProgress) return;
+    const command = this.inputElement.value;
+    this.inputElement.value = '';
+    this.parseInput(command);
   }
 
   private onPromptKeyDown(event: KeyboardEvent): void {
-    if (event.key === 'ArrowUp' || event.key === 'ArrowDown') {
-      let command: string | undefined;
-      if (event.key === 'ArrowUp') {
-        command = this.history.backward();
-      } else if (event.key === 'ArrowDown') {
-        command = this.history.forward();
-      }
-      if (typeof command === 'string') {
-        event.preventDefault();
-        this.inputElement.value = command;
-      }
+    if (!(event.key === 'ArrowUp' || event.key === 'ArrowDown')) {
+      return;
     }
+
+    const command = event.key === 'ArrowUp' ? this.history.backward() : this.history.forward();
+    if (typeof command !== 'string') {
+      return;
+    }
+
+    event.preventDefault();
+    this.inputElement.value = command;
   }
 
   private parseInput(input: string): void {
@@ -104,19 +109,26 @@ export class CommandPrompt extends HTMLElement {
     const parameters = input.slice(commandLength).trim();
     this.onCommandStart(input);
     this.runCommand(command, parameters)
-      .catch(error => this.outputError(error))
-      .finally(() => this.onCommandEnd());
+      .catch((error: unknown) => {
+        this.outputError(error);
+      })
+      .finally(() => {
+        this.onCommandEnd();
+      });
   }
 
   private async runCommand(command: string, parametersString: string): Promise<void> {
     const { handler } = await getCommandModule(command);
-    if (typeof handler === 'string') return this.outputText(handler);
+    if (typeof handler === 'string') {
+      this.outputText(handler);
+      return;
+    }
     const parameters = parseParameters(parametersString);
     return handler(this, parameters);
   }
 
   private onCommandStart(input: string): void {
-    this.addOutput({ type: 'command', content: `${input}` });
+    this.addOutput({ type: 'command', content: input });
     this.history.add(input);
     this.classList.add(COMMAND_IN_PROGRESS_CLASSNAME);
   }

@@ -1,9 +1,9 @@
-import { CommandModule } from '../command-prompt.types';
+import type { CommandModule } from '../command-prompt.types.js';
 
 const reloadModule: CommandModule = {
   manpage: 'reloads the page',
-  async handler() {
-    return window.location.reload();
+  handler() {
+    globalThis.location.reload();
   }
 };
 

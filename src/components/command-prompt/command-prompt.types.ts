@@ -1,12 +1,12 @@
-import { CommandPrompt } from './command-prompt';
-import { ParsedParameters } from './lib/parse-parameters';
+import type { CommandPrompt } from './command-prompt.js';
+import type { ParsedParameters } from './lib/parse-parameters.js';
 
 export interface CommandOutput {
   type: 'command' | 'text' | 'error';
   content: string;
 }
 
-export type CommandFunction = (commandPrompt: CommandPrompt, parameters: ParsedParameters) => Promise<void>;
+export type CommandFunction = (commandPrompt: CommandPrompt, parameters: ParsedParameters) => Promise<void> | void;
 
 export type CommandHandler = CommandFunction | string;
 

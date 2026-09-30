@@ -5,12 +5,12 @@ import { stringifyError } from '@simbo/stringify-error';
 import type { PackageJson } from 'type-fest';
 
 /**
- * The path to the JSON with personal contact/profile information links.
+ * Project-relative path to the contact links used by the HTML templates.
  */
 const LINKS_PATH = './src/content/links.json';
 
 /**
- * The interface for a link;
+ * A contact or profile link rendered in the terminal's contact list.
  */
 export interface Link {
   href: string;
@@ -28,11 +28,11 @@ try {
 }
 
 /**
- * A list of links with personal contact information.
+ * Contact and profile links read from the project's content JSON during config loading.
  */
 export const links: Link[] = linksList;
 
 /**
- * The project's current package.json as object.
+ * Project package metadata used to expose the current version to templates and browser code.
  */
 export const packageJson: PackageJson = await readPackageJson();

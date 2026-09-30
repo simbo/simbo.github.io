@@ -1,6 +1,6 @@
-import { TypedText } from '../../typed-text/typed-text';
-import { CommandModule } from '../command-prompt.types';
-import { renderSection } from '../lib/render-output';
+import type { TypedText } from '../../typed-text/typed-text.js';
+import type { CommandModule } from '../command-prompt.types.js';
+import { renderSection } from '../lib/render-output.js';
 
 const typeModule: CommandModule = {
   manpage: {
@@ -12,13 +12,14 @@ const typeModule: CommandModule = {
     ].join('<br>')
   },
 
-  async handler(prompt, { inputs }) {
-    const typedText = document.querySelector('typed-text') as TypedText;
+  handler(prompt, { inputs }) {
+    const typedText = globalThis.document.querySelector('typed-text') as TypedText;
     switch ((inputs[0] || '').toLowerCase()) {
       case 'start': {
         if (typedText.isTyping) {
           throw new Error('typing is already in progress');
-        } else if (typedText.typingDone) {
+        }
+        if (typedText.typingDone) {
           throw new Error('nothing more to type');
         }
         typedText.startTyping();

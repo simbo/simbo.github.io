@@ -1,5 +1,5 @@
-import { ColorTheme } from '../../../lib/color-theme';
-import { CommandModule } from '../command-prompt.types';
+import { ColorTheme } from '../../../lib/color-theme.js';
+import type { CommandModule } from '../command-prompt.types.js';
 
 const themeModule: CommandModule = {
   manpage: {
@@ -7,7 +7,7 @@ const themeModule: CommandModule = {
     examples: ['color-theme', 'color-theme toggle', 'color-theme [light|dark]']
   },
 
-  async handler(prompt, { inputs }) {
+  handler(prompt, { inputs }) {
     const colorTheme = inputs.at(-1)?.toLocaleLowerCase();
     if (colorTheme === 'toggle') {
       ColorTheme.toggle();

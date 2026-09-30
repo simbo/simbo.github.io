@@ -1,4 +1,4 @@
-import { CommandModule } from '../command-prompt.types';
+import type { CommandModule } from '../command-prompt.types.js';
 
 const helpModule: CommandModule = {
   manpage: 'displays a basic help text',

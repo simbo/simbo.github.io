@@ -1,24 +1,26 @@
-import { ColorTheme, ColorThemeValue } from '../../lib/color-theme';
-import { ICON_NAME_ATTRIBUTE, SvgIcon } from '../svg-icon/svg-icon';
+import { ColorTheme, ColorThemeValue } from '../../lib/color-theme.js';
+import { ICON_NAME_ATTRIBUTE, type SvgIcon } from '../svg-icon/svg-icon.js';
 
 export class ColorThemeToggle extends HTMLElement {
   private svgIcon!: SvgIcon;
 
   public connectedCallback(): void {
-    const button = document.createElement('button') as HTMLButtonElement;
+    const button = globalThis.document.createElement('button');
     button.setAttribute('title', 'Toggle Color Theme');
     button.addEventListener('click', (event: Event) => {
       event.preventDefault();
       ColorTheme.toggle();
     });
 
-    this.svgIcon = document.createElement('svg-icon') as SvgIcon;
+    this.svgIcon = globalThis.document.createElement('svg-icon') as SvgIcon;
     this.svgIcon.classList.add('as-block');
 
     this.setIconNameByColorTheme();
 
-    const observer = new MutationObserver(() => this.setIconNameByColorTheme());
-    observer.observe(document.documentElement, {
+    const observer = new MutationObserver(() => {
+      this.setIconNameByColorTheme();
+    });
+    observer.observe(globalThis.document.documentElement, {
       attributeFilter: ['data-color-theme']
     });
 
@@ -30,7 +32,7 @@ export class ColorThemeToggle extends HTMLElement {
     const iconName = {
       [ColorThemeValue.Light]: 'moon',
       [ColorThemeValue.Dark]: 'sun'
-    }[document.documentElement.dataset.colorTheme as string];
+    }[globalThis.document.documentElement.dataset.colorTheme as string];
     if (iconName) {
       this.svgIcon.setAttribute(ICON_NAME_ATTRIBUTE, iconName);
     }

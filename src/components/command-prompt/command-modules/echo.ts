@@ -1,12 +1,12 @@
-import { CommandModule } from '../command-prompt.types';
-import { sanitizeText } from '../lib/sanitize-text';
+import type { CommandModule } from '../command-prompt.types.js';
+import { sanitizeText } from '../lib/sanitize-text.js';
 
 const echoModule: CommandModule = {
   manpage: 'outputs inputs',
 
-  async handler(prompt, parameters) {
+  handler(prompt, parameters) {
     const partials = parameters.inputs;
-    prompt.outputText(`${partials.map(partial => sanitizeText(partial)).join(' ')}`);
+    prompt.outputText(partials.map(partial => sanitizeText(partial)).join(' '));
   }
 };
 

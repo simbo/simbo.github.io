@@ -20,6 +20,7 @@
   "packageManager": "pnpm@12.8.1",
   "scripts": {
     "browserslist": "browserslist",
+    "browserslist:update": "pnpx --yes update-browserslist-db@latest",
     "build": "tsc && vite build",
     "bundle-analyzer": "pnpx --yes vite-bundle-visualizer",
     "check": "pnpm run check:eslint && pnpm run check:format && pnpm run check:types && pnpm run check:spelling",
@@ -34,7 +35,6 @@
     "ncu:latest": "ncu --interactive --target latest --reject='/^(@types/node)$/'",
     "ncu:minor": "ncu --interactive --target minor",
     "ncu:patch": "ncu --interactive --target patch",
-    "postinstall": "pnpx --yes update-browserslist-db@latest",
     "preflight": "pnpm run check && pnpm run build",
     "prepare": "husky",
     "serve": "pnpm run serve:dev",

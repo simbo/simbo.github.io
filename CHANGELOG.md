@@ -1,5 +1,12 @@
 # simbo.github.io
 
+## 3.5.1
+
+### Patch Changes
+
+- 62c1248: Disable Jekyll processing on GitHub Pages so JavaScript assets with
+  leading underscores are served correctly.
+
 ## 3.5.0
 
 ### Minor Changes

@@ -155,7 +155,7 @@ export class TypedText extends HTMLElement {
   }
 
   private setTimeout(callback: () => void, duration = 0): void {
-    this.typeTimeout = globalThis.setTimeout(callback, duration);
+    this.typeTimeout = globalThis.window.setTimeout(callback, duration);
   }
 
   private clearTimeout(): void {

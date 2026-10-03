@@ -21,7 +21,7 @@ export class ColorThemeToggle extends HTMLElement {
       this.setIconNameByColorTheme();
     });
     observer.observe(globalThis.document.documentElement, {
-      attributeFilter: ['data-color-theme']
+      attributeFilter: ['data-color-theme'],
     });
 
     this.append(button);
@@ -31,7 +31,7 @@ export class ColorThemeToggle extends HTMLElement {
   private setIconNameByColorTheme(): void {
     const iconName = {
       [ColorThemeValue.Light]: 'moon',
-      [ColorThemeValue.Dark]: 'sun'
+      [ColorThemeValue.Dark]: 'sun',
     }[globalThis.document.documentElement.dataset.colorTheme as string];
     if (iconName) {
       this.svgIcon.setAttribute(ICON_NAME_ATTRIBUTE, iconName);

@@ -16,7 +16,7 @@ const commandsModule: CommandModule = {
 
   handler(prompt) {
     prompt.outputText(`some commands and their aliases:<br>${commands}`);
-  }
+  },
 };
 
 export default commandsModule;

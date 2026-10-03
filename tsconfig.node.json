@@ -6,6 +6,9 @@
     "./vite.config.ts",
     "./vite-content.ts",
     "./vite-nunjucks.plugin.ts",
-    "./vite-html-minifier.plugin.ts"
+    "./vite-html-minifier.plugin.ts",
+    "./vitest.config.ts",
+    "./*.test.ts",
+    "./tests/build.test.ts"
   ]
 }

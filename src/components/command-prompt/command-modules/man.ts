@@ -35,7 +35,7 @@ const manModule: CommandModule = {
     if (append) {
       prompt.outputText(append);
     }
-  }
+  },
 };
 
 export default manModule;

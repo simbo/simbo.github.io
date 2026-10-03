@@ -20,7 +20,7 @@ export function renderUsageExamples(examples: Examples, outputHandler?: OutputHa
   examples = Array.isArray(examples) ? examples : [examples];
   const output = renderSection(
     'usage',
-    `<br>${examples.map(example => `  <span class="yellow">${example}</span>`).join('<br>')}`
+    `<br>${examples.map(example => `  <span class="yellow">${example}</span>`).join('<br>')}`,
   );
   return outputHandler ? outputHandler(output) : output;
 }

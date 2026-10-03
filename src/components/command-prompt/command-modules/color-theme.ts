@@ -4,7 +4,7 @@ import type { CommandModule } from '../command-prompt.types.js';
 const themeModule: CommandModule = {
   manpage: {
     description: 'displays the current color theme or switches the color theme',
-    examples: ['color-theme', 'color-theme toggle', 'color-theme [light|dark]']
+    examples: ['color-theme', 'color-theme toggle', 'color-theme [light|dark]'],
   },
 
   handler(prompt, { inputs }) {
@@ -15,7 +15,7 @@ const themeModule: CommandModule = {
       ColorTheme.theme = colorTheme as string;
     }
     prompt.outputText(`current color theme: ${ColorTheme.theme}`);
-  }
+  },
 };
 
 export default themeModule;

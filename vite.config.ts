@@ -35,7 +35,7 @@ export default defineConfig(({ command }) => {
     AUTHOR_FIRST_NAME,
     AUTHOR_LAST_NAME,
     AUTHOR_NAME,
-    AUTHOR_USER
+    AUTHOR_USER,
   };
 
   const config: UserConfig = {
@@ -54,14 +54,14 @@ export default defineConfig(({ command }) => {
       rolldownOptions: {
         output: {
           codeSplitting: {
-            groups: [{ name: 'vendor', test: /[\\/]node_modules[\\/]/ }]
-          }
+            groups: [{ name: 'vendor', test: /[\\/]node_modules[\\/]/ }],
+          },
         },
         input: {
-          index: fileURLToPath(new URL('src/index.html', import.meta.url))
+          index: fileURLToPath(new URL('src/index.html', import.meta.url)),
           // foo: fileURLToPath(new URL('src/foo.html', import.meta.url)) // another page
-        }
-      }
+        },
+      },
     },
 
     plugins: [nunjucksPlugin({ locals: { ...globals, LINKS: links } }), htmlMinifierPlugin()],
@@ -77,15 +77,15 @@ export default defineConfig(({ command }) => {
       preprocessorOptions: {
         scss: {
           loadPaths: [fileURLToPath(new URL('src/styles', import.meta.url))],
-          style: 'expanded'
-        }
+          style: 'expanded',
+        },
       },
       transformer: 'postcss',
       postcss: {
-        plugins: [autoprefixer({ remove: false })]
+        plugins: [autoprefixer({ remove: false })],
       },
-      devSourcemap: true
-    }
+      devSourcemap: true,
+    },
   };
 
   return config;

@@ -1,7 +1,7 @@
 const CHAR_ESCAPE_MAP: Record<string, string> = {
   '&': '&amp;',
   '<': '&lt;',
-  '>': '&gt;'
+  '>': '&gt;',
 };
 
 /**

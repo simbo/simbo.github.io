@@ -17,7 +17,7 @@ const nunjucksOptions: ConfigureOptions = {
   lstripBlocks: true,
   noCache: true,
   throwOnUndefined: true,
-  trimBlocks: true
+  trimBlocks: true,
 };
 
 /**
@@ -54,9 +54,9 @@ export default function nunjucksPlugin(options: Partial<NunjucksPluginOptions> =
                   .catch((error: unknown) => {
                     callback(error instanceof Error ? error : new Error(String(error)), null);
                   });
-              }
+              },
             },
-            nunjucksOptions
+            nunjucksOptions,
           );
           const pageLocals = locals[basename(context.path)];
           environment.renderString(
@@ -66,9 +66,9 @@ export default function nunjucksPlugin(options: Partial<NunjucksPluginOptions> =
               if (error) reject(error);
               else if (rendered === null) reject(new Error('Nunjucks returned no rendered HTML'));
               else resolve(rendered);
-            }
+            },
           );
-        })
-    }
+        }),
+    },
   };
 }

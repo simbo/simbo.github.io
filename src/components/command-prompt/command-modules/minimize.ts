@@ -6,7 +6,7 @@ const minimizeModule: CommandModule = {
 
   handler(prompt) {
     prompt.outputText(resizeTerminalView('min') ? 'terminal view minimized' : 'terminal view is already minimized');
-  }
+  },
 };
 
 export default minimizeModule;

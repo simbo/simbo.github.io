@@ -7,7 +7,7 @@ const echoModule: CommandModule = {
   handler(prompt, parameters) {
     const partials = parameters.inputs;
     prompt.outputText(partials.map(partial => sanitizeText(partial)).join(' '));
-  }
+  },
 };
 
 export default echoModule;

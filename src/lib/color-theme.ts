@@ -1,6 +1,6 @@
 export enum ColorThemeValue {
   Light = 'light',
-  Dark = 'dark'
+  Dark = 'dark',
 }
 
 const DEFAULT_COLOR_THEME_VALUE = ColorThemeValue.Light;
@@ -54,7 +54,7 @@ export const ColorTheme = {
     setTheme(
       globalThis.document.documentElement.dataset.colorTheme === ColorThemeValue.Dark
         ? ColorThemeValue.Light
-        : ColorThemeValue.Dark
+        : ColorThemeValue.Dark,
     );
   },
 
@@ -67,5 +67,5 @@ export const ColorTheme = {
 
   set theme(theme: string) {
     setTheme(theme);
-  }
+  },
 };

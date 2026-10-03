@@ -6,7 +6,7 @@ const maximizeModule: CommandModule = {
 
   handler(prompt) {
     prompt.outputText(resizeTerminalView('max') ? 'terminal view maximized' : 'terminal view is already maximized');
-  }
+  },
 };
 
 export default maximizeModule;

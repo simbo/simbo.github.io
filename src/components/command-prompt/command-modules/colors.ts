@@ -12,8 +12,8 @@ const colorsModule: CommandModule = {
     '<span class="bg-yellow"> </span> <span class="yellow">yellow</span>',
     '<span class="bg-orange"> </span> <span class="orange">orange</span>',
     '<span class="bg-white"> </span> <span class="white">white</span>',
-    '<span class="bg-dim"> </span> <span class="dim">dim</span>'
-  ].join('<br>')
+    '<span class="bg-dim"> </span> <span class="dim">dim</span>',
+  ].join('<br>'),
 };
 
 export default colorsModule;

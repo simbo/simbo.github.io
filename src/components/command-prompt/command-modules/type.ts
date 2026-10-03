@@ -8,8 +8,8 @@ const typeModule: CommandModule = {
     examples: ['type [ACTION]'],
     append: [
       renderSection('possible actions', '<br>  start, stop, restart, reset, status'),
-      renderSection('default action', '<br>  status')
-    ].join('<br>')
+      renderSection('default action', '<br>  status'),
+    ].join('<br>'),
   },
 
   handler(prompt, { inputs }) {
@@ -57,7 +57,7 @@ const typeModule: CommandModule = {
         throw new Error('unknown input for type');
       }
     }
-  }
+  },
 };
 
 export default typeModule;

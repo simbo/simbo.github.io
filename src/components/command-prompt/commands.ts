@@ -1,5 +1,12 @@
 import type { CommandModule } from './command-prompt.types.js';
 
+interface CommandImport {
+  default: CommandModule;
+}
+
+const COMMAND_MODULE_LOADERS: Record<string, (() => Promise<CommandImport>) | undefined> =
+  import.meta.glob<CommandImport>(['./command-modules/*.ts', '!./command-modules/*.test.ts']);
+
 const COMMAND_MODULES_CACHE = new Map<string, CommandModule>();
 
 /**
@@ -18,7 +25,7 @@ export const PUBLIC_COMMANDS = [
   'minimize',
   'reload',
   'type',
-  'version'
+  'version',
 ];
 
 /**
@@ -31,7 +38,7 @@ export const COMMAND_ALIASES: Record<string, string> = {
   max: 'maximize',
   min: 'minimize',
   print: 'echo',
-  theme: 'color-theme'
+  theme: 'color-theme',
 };
 
 /**
@@ -39,7 +46,7 @@ export const COMMAND_ALIASES: Record<string, string> = {
  */
 const BUILTIN_COMMAND_MODULES: Record<string, CommandModule | undefined> = {
   foo: { handler: 'bar' },
-  test: { handler: 'test passed.' }
+  test: { handler: 'test passed.' },
 };
 
 /**
@@ -67,7 +74,9 @@ export async function getCommandModule(command: string): Promise<CommandModule> 
   if (!COMMAND_MODULES_CACHE.has(command)) {
     let module: CommandModule;
     try {
-      module = ((await import(`./command-modules/${command}.ts`)) as { default: CommandModule }).default;
+      const loadModule = COMMAND_MODULE_LOADERS[`./command-modules/${command}.ts`];
+      if (!loadModule) throw new Error(`unknown command: ${command}`);
+      module = (await loadModule()).default;
     } catch {
       throw new Error(`unknown command: ${command}`);
     }

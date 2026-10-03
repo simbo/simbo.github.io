@@ -18,10 +18,10 @@ export function htmlMinifierPlugin(): Plugin {
             collapseWhitespace: true,
             conservativeCollapse: true,
             preserveLineBreaks: true,
-            removeComments: true
+            removeComments: true,
           });
         }
       }
-    }
+    },
   };
 }

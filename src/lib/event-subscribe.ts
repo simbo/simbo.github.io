@@ -23,7 +23,7 @@ export interface EventSubscriptionOptions {
 
 const DEFAULT_EVENT_SUBSCRIPTION_OPTIONS: EventSubscriptionOptions = {
   skip: 0,
-  once: false
+  once: false,
 };
 
 /**
@@ -41,7 +41,7 @@ export function eventSubscribe(
   element: Element,
   type: string,
   handler: EventHandler,
-  options: Partial<EventSubscriptionOptions> = {}
+  options: Partial<EventSubscriptionOptions> = {},
 ): EventSubscription {
   const { skip, once, tagName } = { ...DEFAULT_EVENT_SUBSCRIPTION_OPTIONS, ...options };
   const unsubscribe = (): void => {

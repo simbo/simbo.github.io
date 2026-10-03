@@ -26,7 +26,7 @@ eventSubscribe(
         console.error('Failed to load the command prompt component:', error);
       });
   },
-  { once: true }
+  { once: true },
 );
 
 eventSubscribe(
@@ -41,7 +41,7 @@ eventSubscribe(
     typedText.classList.remove(INITIAL_CONTENT_CLASS);
     unsubscribe();
   },
-  { skip: 1 }
+  { skip: 1 },
 );
 
 eventSubscribe(
@@ -50,7 +50,7 @@ eventSubscribe(
   () => {
     typedText.classList.add(INITIAL_CONTENT_CLASS);
   },
-  { once: true }
+  { once: true },
 );
 
 eventSubscribe(
@@ -62,7 +62,7 @@ eventSubscribe(
       typedText.startTyping();
     }
   },
-  { tagName: 'button' }
+  { tagName: 'button' },
 );
 
 const typedTextModule = await import('./components/typed-text/typed-text.js');

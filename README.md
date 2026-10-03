@@ -17,6 +17,25 @@ My personal website.
 See generated contents at the
 [`gh-pages`](https://github.com/simbo/simbo.github.io/tree/gh-pages) branch.
 
+## Development and Tests
+
+Install dependencies with `pnpm install` and start the development server with
+`pnpm run serve`.
+
+- `pnpm run test`: run all unit and integration tests with V8 coverage.
+- `pnpm run test:watch`: rerun tests while editing, including coverage.
+- `pnpm run test:ui`: open the Vitest UI.
+- `pnpm run serve:coverage`: serve the HTML coverage report.
+- `pnpm run preflight`: run all checks, tests, and the production build.
+
+The Vitest scripts and coverage configuration follow
+[simbo/packages](https://github.com/simbo/packages). Test files use the
+`.test.ts` suffix and live next to the file being tested. Tests spanning
+multiple modules live in `tests/`, alongside shared test helpers and setup.
+Browser code is tested in jsdom; build plugins use the Node.js environment.
+Coverage reports are written to `coverage/` as HTML and LCOV, with a summary in
+the terminal. End-to-end tests are not included.
+
 ## License and Author
 
 [MIT &copy; 2018 Simon Lepel](https://simbo.mit-license.org/@2018/)

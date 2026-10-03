@@ -1,5 +1,16 @@
 # simbo.github.io
 
+## 3.5.3
+
+### Patch Changes
+
+- f7fce95: Introduce Vitest unit and integration tests with coverage, watch
+  mode, UI, and CI checks. Keep adjacent command tests out of the production
+  bundle and use the browser timer API explicitly for the typing animation.
+- f7fce95: Use the shared Prettier configuration and align source formatting
+  with it. Remove the obsolete ESLint configuration and npm lockfile in favor of
+  the existing ESLint flat configuration and pnpm lockfile.
+
 ## 3.5.2
 
 ### Patch Changes

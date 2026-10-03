@@ -1,1 +1,0 @@
-import{n as e,t}from"./svg-icon-DMFfEXCQ.js";export{t as ICON_NAME_ATTRIBUTE,e as SvgIcon};

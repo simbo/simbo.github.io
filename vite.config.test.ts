@@ -20,7 +20,7 @@ it.each(['build', 'serve'] as const)('provides site globals and plugins for %s',
   expect(result.define?.SITE_URL).toBe(JSON.stringify('https://simbo.de/'));
   expect(result.plugins).toEqual(
     expect.arrayContaining([
-      expect.objectContaining({ name: 'nunjucks' }),
+      expect.objectContaining({ name: 'vite-plugin-nunjucks', enforce: 'pre' }),
       expect.objectContaining({ name: 'html-minifier' }),
     ]),
   );

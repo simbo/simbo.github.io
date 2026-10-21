@@ -23,12 +23,11 @@ function userPrefersColorScheme(scheme: 'light' | 'dark'): boolean {
  * @param theme - Theme name to apply; only `light` and `dark` are accepted.
  */
 function setTheme(theme?: string): void {
-  const themeValues = Object.values(ColorThemeValue);
-  if (!themeValues.includes(theme as ColorThemeValue)) {
+  if (theme !== ColorThemeValue.Light && theme !== ColorThemeValue.Dark) {
     return;
   }
   globalThis.document.documentElement.dataset.colorTheme = theme;
-  globalThis.localStorage.setItem(COLOR_THEME_STORAGE_KEY, theme as string);
+  globalThis.localStorage.setItem(COLOR_THEME_STORAGE_KEY, theme);
 }
 
 export const ColorTheme = {
@@ -59,10 +58,7 @@ export const ColorTheme = {
   },
 
   get theme(): string {
-    return (
-      (globalThis.document.documentElement.dataset.colorTheme as ColorThemeValue | undefined) ??
-      DEFAULT_COLOR_THEME_VALUE
-    );
+    return globalThis.document.documentElement.dataset.colorTheme ?? DEFAULT_COLOR_THEME_VALUE;
   },
 
   set theme(theme: string) {

@@ -1,11 +1,11 @@
 import { fileURLToPath } from 'node:url';
 
+import nunjucksPlugin from '@simbo/vite-plugin-nunjucks';
 import autoprefixer from 'autoprefixer';
 import { defineConfig, type UserConfig } from 'vite';
 
 import { links, packageJson } from './vite-content.js';
 import { htmlMinifierPlugin } from './vite-html-minifier.plugin.js';
-import nunjucksPlugin from './vite-nunjucks.plugin.js';
 
 type Globals = Record<string, string | boolean | number>;
 

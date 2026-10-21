@@ -1,5 +1,20 @@
 # simbo.github.io
 
+## 3.5.4
+
+### Patch Changes
+
+- 49d624d: Update development dependencies and pnpm, and adapt theme validation
+  to the updated lint rules.
+- 90aad7f: Replace the local HTML minifier with @simbo/vite-plugin-html-minifier
+  while preserving production whitespace handling and comment removal after
+  template rendering and asset processing. Remove the local implementation and
+  its unit tests, and use the package's bundled engine dependencies.
+- 49d624d: Replace the local Nunjucks integration with
+  @simbo/vite-plugin-nunjucks while preserving site variables, layout rendering,
+  HTML escaping, and development reloads. Remove the local implementation and
+  its unit tests.
+
 ## 3.5.3
 
 ### Patch Changes

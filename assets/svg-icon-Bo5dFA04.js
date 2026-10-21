@@ -1,0 +1,1 @@
+export{t as ICON_NAME_ATTRIBUTE,n as SvgIcon}from"./svg-icon-CTfK4hjA.js";

@@ -32,9 +32,9 @@ The Vitest scripts and coverage configuration follow
 [simbo/packages](https://github.com/simbo/packages). Test files use the
 `.test.ts` suffix and live next to the file being tested. Tests spanning
 multiple modules live in `tests/`, alongside shared test helpers and setup.
-Browser code is tested in jsdom; build plugins use the Node.js environment.
-Coverage reports are written to `coverage/` as HTML and LCOV, with a summary in
-the terminal. End-to-end tests are not included.
+Browser code is tested in jsdom; Vite configuration and production builds use
+the Node.js environment. Coverage reports are written to `coverage/` as HTML and
+LCOV, with a summary in the terminal. End-to-end tests are not included.
 
 ## License and Author
 

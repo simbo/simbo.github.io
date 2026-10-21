@@ -14,7 +14,7 @@ export default defineConfig({
     coverage: {
       provider: 'v8',
       reporter: ['text-summary', 'html', 'lcov'],
-      include: ['src/**/*.ts', 'vite-content.ts', 'vite.config.ts', 'vite-*.plugin.ts'],
+      include: ['src/**/*.ts', 'vite-content.ts', 'vite.config.ts'],
       exclude: ['src/**/*.d.ts', 'src/**/*.{type,types,interface,interfaces,enum}.ts'],
     },
   },

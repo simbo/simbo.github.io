@@ -21,7 +21,7 @@ it.each(['build', 'serve'] as const)('provides site globals and plugins for %s',
   expect(result.plugins).toEqual(
     expect.arrayContaining([
       expect.objectContaining({ name: 'vite-plugin-nunjucks', enforce: 'pre' }),
-      expect.objectContaining({ name: 'html-minifier' }),
+      expect.objectContaining({ name: 'vite-plugin-html-minifier', apply: 'build', enforce: 'post' }),
     ]),
   );
   expect(result.root).toBe('src');

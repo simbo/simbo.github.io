@@ -1,4 +1,4 @@
-%color-theme--light {
+@mixin color-theme--light {
   --terminal-black: #3b3b3b;
   --terminal-blue: #0431fa;
   --terminal-green: #66b12d;
@@ -17,7 +17,7 @@
   --border-color: #e5e5e5;
 }
 
-%color-theme--dark {
+@mixin color-theme--dark {
   --terminal-black: #444;
   --terminal-blue: #4698f4;
   --terminal-green: #66b12d;
@@ -39,10 +39,17 @@
 :root {
   &,
   &[data-color-theme='light'] {
-    @extend %color-theme--light;
+    @include color-theme--light;
   }
 
   &[data-color-theme='dark'] {
-    @extend %color-theme--dark;
+    @include color-theme--dark;
+  }
+}
+
+// Follow the system preference before the script applies a theme.
+@media (prefers-color-scheme: dark) {
+  :root:not([data-color-theme]) {
+    @include color-theme--dark;
   }
 }

@@ -21,14 +21,20 @@ describe('ColorTheme', () => {
     ColorTheme.initialize();
     expect(ColorTheme.theme).toBe(theme);
   });
-  it.each(['light', 'dark', 'none'])('initializes with system preference %s', theme => {
+  it.each(['light', 'dark', 'none'])('initializes with system preference %s without saving it', theme => {
     vi.mocked(globalThis.matchMedia).mockImplementation(
       media => ({ matches: media.includes(theme), addEventListener: vi.fn() }) as unknown as MediaQueryList,
     );
     ColorTheme.initialize();
     expect(ColorTheme.theme).toBe(theme === 'dark' ? 'dark' : 'light');
+    expect(globalThis.localStorage.getItem('color-theme')).toBeNull();
   });
-  it('follows system preference changes', () => {
+  it('ignores an unsupported saved value', () => {
+    globalThis.localStorage.setItem('color-theme', 'invalid');
+    ColorTheme.initialize();
+    expect(ColorTheme.theme).toBe('light');
+  });
+  it('follows system preference changes until the user chooses a theme', () => {
     const listener = vi.fn();
     vi.mocked(globalThis.matchMedia).mockReturnValue({
       matches: false,
@@ -40,5 +46,21 @@ describe('ColorTheme', () => {
     expect(ColorTheme.theme).toBe('dark');
     change({ matches: false });
     expect(ColorTheme.theme).toBe('light');
+    expect(globalThis.localStorage.getItem('color-theme')).toBeNull();
+    ColorTheme.toggle();
+    change({ matches: false });
+    expect(ColorTheme.theme).toBe('dark');
+  });
+  it('keeps working when storage is blocked', () => {
+    vi.spyOn(Storage.prototype, 'getItem').mockImplementation(() => {
+      throw new Error('blocked');
+    });
+    vi.spyOn(Storage.prototype, 'setItem').mockImplementation(() => {
+      throw new Error('blocked');
+    });
+    ColorTheme.initialize();
+    expect(ColorTheme.theme).toBe('light');
+    ColorTheme.toggle();
+    expect(ColorTheme.theme).toBe('dark');
   });
 });

@@ -1,5 +1,34 @@
 # simbo.github.io
 
+## 3.6.0
+
+### Minor Changes
+
+- 58b896a: Add a legal notice and a privacy notice in German and English at
+  stable URLs (`/imprint/`, `/imprint/en/`, `/privacy/`, `/privacy/en/`) for all
+  private, non-commercial websites and applications to link to. The privacy
+  notice covers hosting on GitHub Pages and on an own server, the self-hosted
+  visitor statistics, contact by email and the visitor's rights, with the same
+  section anchors in both languages, and the language switch keeps the current
+  section. The legal notice is excluded from search engines. Rework the footer
+  on all pages into two lines: links to the home page, legal notice and privacy
+  notice, then the repository link with the version. The MIT license notice
+  moves out of the footer.
+
+### Patch Changes
+
+- 9be6f1e: Save the color theme only after an explicit choice. Without one,
+  follow the system preference and its changes without storing anything, apply
+  the dark theme through CSS before the script runs, and keep working when
+  storage is blocked.
+- f4fa401: Remove the obsolete cache meta tags, which browsers ignore. Caching
+  is controlled by the HTTP headers of GitHub Pages.
+- e2053db: Remove the session recorder script and load the cookieless page view
+  tracker asynchronously, so a slow tracker host no longer delays the site.
+- ac9a9b8: Show the page without waiting for the load event. Only the terminal
+  stays hidden until its script has taken over the content, and it is shown
+  without JavaScript or after a short delay if the script fails.
+
 ## 3.5.4
 
 ### Patch Changes

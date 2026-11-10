@@ -59,7 +59,10 @@ export default defineConfig(({ command }) => {
         },
         input: {
           index: fileURLToPath(new URL('src/index.html', import.meta.url)),
-          // foo: fileURLToPath(new URL('src/foo.html', import.meta.url)) // another page
+          imprint: fileURLToPath(new URL('src/imprint/index.html', import.meta.url)),
+          'imprint-en': fileURLToPath(new URL('src/imprint/en/index.html', import.meta.url)),
+          privacy: fileURLToPath(new URL('src/privacy/index.html', import.meta.url)),
+          'privacy-en': fileURLToPath(new URL('src/privacy/en/index.html', import.meta.url)),
         },
       },
     },

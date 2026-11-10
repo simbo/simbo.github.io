@@ -1,0 +1,33 @@
+{% set pageLang = 'en' %} {% set pageRobots = 'noindex, follow' %} {% set pagePath = 'imprint/en/' %} {% set pageTitle =
+"Simbo's Legal Notice" %} {% set pageDescription = 'Legal notice for the private, non-commercial websites and
+applications by Simon Lepel.' %} {% set altLang = 'de' %} {% set altPath = 'imprint/' %} {% set altLabel = 'Deutsch' %}
+{% extends "../../layouts/legal.html" %} {% block content %}
+
+<h1>Legal Notice</h1>
+
+<p class="legal__lead">
+  This legal notice applies to all private, non-commercial websites and applications by Simon Lepel that link here.
+</p>
+
+<h2 id="provider">Information pursuant to § 18 (1) MStV</h2>
+
+<address>
+  Simon Lepel<br />
+  Breitestraße 28<br />
+  73550 Waldstetten<br />
+  Germany
+</address>
+
+<p>Email: <a href="mailto:simbo@simbo.de">simbo@simbo.de</a></p>
+
+<h2 id="privacy">Privacy</h2>
+
+<p>Information on data protection can be found in the <a href="/privacy/en/">privacy notice</a>.</p>
+
+<p class="legal__meta">
+  This is a translation for convenience. The <a href="/imprint/" hreflang="de" lang="de">German version</a> is
+  authoritative.<br />
+  MStV refers to the German Interstate Media Treaty (Medienstaatsvertrag).
+</p>
+
+{% endblock %}

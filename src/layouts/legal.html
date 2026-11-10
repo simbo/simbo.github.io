@@ -1,0 +1,20 @@
+{% extends "./global.html" %} {% from "./footer.html" import footer with context %} {% block head %} {{ super() }}
+<link rel="alternate" hreflang="{{ pageLang }}" href="{{ SITE_URL }}{{ pagePath }}" />
+<link rel="alternate" hreflang="{{ altLang }}" href="{{ SITE_URL }}{{ altPath }}" />
+<link rel="alternate" hreflang="x-default" href="{{ SITE_URL }}{{ pagePath if pageLang == 'de' else altPath }}" />
+
+<script type="module" src="/legal.ts"></script>
+
+{% endblock %} {% block body %}
+
+<header class="legal-header">
+  <a class="legal-header__home" href="/"><span>simbo.de</span></a>
+  <a class="legal-header__language" href="/{{ altPath }}" hreflang="{{ altLang }}" lang="{{ altLang }}" data-keep-hash>
+    {{ altLabel }}
+  </a>
+</header>
+
+<main class="legal">{% block content %}{% endblock %}</main>
+
+{% if pageLang == 'de' %} {{ footer('/imprint/', 'Impressum', '/privacy/', 'Datenschutz') }} {% else %} {{
+footer('/imprint/en/', 'Imprint', '/privacy/en/', 'Privacy') }} {% endif %} {% endblock %}

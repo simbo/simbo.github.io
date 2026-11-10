@@ -1,4 +1,5 @@
-{% extends "layouts/global.html" %} {% block head %} {{ super() }}
+{% extends "layouts/global.html" %} {% from "layouts/footer.html" import footer with context %} {% block head %} {{
+super() }}
 
 <script type="module" src="./index.ts"></script>
 <noscript>
@@ -52,21 +53,4 @@
   </typed-text><command-prompt></command-prompt></div>
 </main>
 
-<footer class="footer">
-  <ul>
-    <li>
-      <a href="https://github.com/simbo/simbo.github.io/" target="_blank">
-        <svg-icon class="is-block" icon-name="github"></svg-icon>
-        <div class="label">simbo.de <span title="Last Build: {{ SITE_LAST_BUILD }}">v{{ SITE_VERSION }}</span></div>
-      </a>
-    </li>
-    <li>
-      <a href="https://simbo.mit-license.org/2018/" target="_blank">
-        <div class="label">{{ SITE_LICENSE }}</div>
-      </a>
-    </li>
-  </ul>
-  <color-theme-toggle></color-theme-toggle>
-</footer>
-
-{% endblock %}
+{{ footer('/imprint/en/', 'Imprint', '/privacy/en/', 'Privacy') }} {% endblock %}

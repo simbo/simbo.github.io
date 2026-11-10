@@ -1,0 +1,28 @@
+{% set pageLang = 'de' %} {% set pageRobots = 'noindex, follow' %} {% set pagePath = 'imprint/' %} {% set pageTitle =
+"Simbo's Impressum" %} {% set pageDescription = 'Impressum für die privaten, nicht kommerziellen Websites und
+Anwendungen von Simon Lepel.' %} {% set altLang = 'en' %} {% set altPath = 'imprint/en/' %} {% set altLabel = 'English'
+%} {% extends "../layouts/legal.html" %} {% block content %}
+
+<h1>Impressum</h1>
+
+<p class="legal__lead">
+  Dieses Impressum gilt für alle privaten, nicht kommerziellen Websites und Anwendungen von Simon Lepel, die hierher
+  verlinken.
+</p>
+
+<h2 id="provider">Angaben nach § 18 Abs. 1 MStV</h2>
+
+<address>
+  Simon Lepel<br />
+  Breitestraße 28<br />
+  73550 Waldstetten<br />
+  Deutschland
+</address>
+
+<p>E-Mail: <a href="mailto:simbo@simbo.de">simbo@simbo.de</a></p>
+
+<h2 id="privacy">Datenschutz</h2>
+
+<p>Informationen zum Datenschutz stehen in den <a href="/privacy/">Datenschutzhinweisen</a>.</p>
+
+{% endblock %}

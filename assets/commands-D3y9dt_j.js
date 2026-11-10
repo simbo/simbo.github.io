@@ -1,0 +1,2 @@
+import{n as e}from"./commands-B8iXnrx2.js";import{t}from"./get-command-aliases-CK4l0KOF.js";var n=e.toSorted((e,t)=>e.localeCompare(t)).map(e=>{let n=t(e);return`  <span class="yellow">${e}</span>${n.length>0?` ${n.map(e=>`<span class="dim">${e}</span>`).join(` `)}`:``}`}).join(`<br>`),r={manpage:`displays some commands and their aliases`,handler(e){e.outputText(`some commands and their aliases:<br>${n}`)}};export{r as default};
+//# sourceMappingURL=commands-D3y9dt_j.js.map

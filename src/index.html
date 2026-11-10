@@ -1,6 +1,13 @@
 {% extends "layouts/global.html" %} {% block head %} {{ super() }}
 
 <script type="module" src="./index.ts"></script>
+<noscript>
+  <style>
+    .main.is-loading {
+      visibility: visible;
+    }
+  </style>
+</noscript>
 
 {% endblock %} {% block body %}
 
@@ -9,7 +16,7 @@
   <p>Personal website of <strong>{{ AUTHOR_NAME }}</strong> alias <strong>{{ AUTHOR_USER }}</strong>.</p>
 </header>
 
-<main class="main">
+<main class="main is-loading">
   <!-- prettier-ignore -->
   <div class="terminal"><typed-text class="has-cursor">
     <div class="intro">

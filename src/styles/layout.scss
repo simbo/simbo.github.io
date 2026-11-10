@@ -26,6 +26,19 @@ body {
   }
 }
 
+// The terminal stays hidden until its script has taken over the raw content,
+// and is revealed after a delay anyway in case the script fails.
+.main.is-loading {
+  visibility: hidden;
+  animation: reveal 0s 2s forwards;
+}
+
+@keyframes reveal {
+  to {
+    visibility: visible;
+  }
+}
+
 // before component is loaded
 command-prompt {
   display: block;

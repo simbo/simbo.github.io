@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" style="visibility: hidden">
+<html lang="en">
   <head>
     {% block head %}
     <meta charset="utf-8" />
@@ -30,12 +30,7 @@
     <script async src="https://trk.srvkist.net/trk.js" data-website-id="c9ce8bab-5c6d-45ae-8127-19de67d3dbb1"></script>
     {% endif %} {% endblock %}
   </head>
-  <body
-    onload="
-      document.documentElement.removeAttribute('style');
-      document.body.removeAttribute('onload');
-    "
-  >
+  <body>
     {% block body %}{% endblock %}
   </body>
 </html>

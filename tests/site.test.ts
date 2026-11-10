@@ -5,12 +5,13 @@ it('initializes the site and connects typing, continuation, commands, and theme 
   // The initial element has not been upgraded to the custom element yet.
   const element = globalThis.document.createElement('typed-text');
   element.innerHTML = 'Hello^stop<button>continue</button>~ simbo^stop!';
-  globalThis.document.body.append(
-    element,
-    globalThis.document.createElement('command-prompt'),
-    globalThis.document.createElement('color-theme-toggle'),
-  );
+  const main = globalThis.document.createElement('main');
+  main.className = 'main is-loading';
+  main.append(element, globalThis.document.createElement('command-prompt'));
+  globalThis.document.body.append(main, globalThis.document.createElement('color-theme-toggle'));
   await import('../src/index.js');
+  // The terminal becomes visible as soon as the script has taken over its raw content.
+  expect(main.classList.contains('is-loading')).toBe(false);
   expect(globalThis.document.documentElement.dataset.colorTheme).toBe('light');
   await vi.waitFor(() => {
     expect(globalThis.customElements.get('command-prompt')).toBeDefined();

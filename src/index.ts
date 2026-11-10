@@ -9,10 +9,12 @@ ColorTheme.initialize();
 
 const INITIAL_CONTENT_CLASS = 'has-initial-content';
 const ADDITIONAL_CONTENT_CLASS = 'has-additional-content';
+const LOADING_CLASS = 'is-loading';
 
 const typedText = globalThis.document.querySelector('typed-text') as TypedText;
 const typedContent = typedText.getHTML();
 typedText.replaceChildren();
+typedText.closest(`.${LOADING_CLASS}`)?.classList.remove(LOADING_CLASS);
 
 eventSubscribe(
   typedText,

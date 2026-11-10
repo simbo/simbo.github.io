@@ -20,6 +20,10 @@ it('builds the site without shipping adjacent tests or the test runner', async (
   expect(source).toContain('https://trk.srvkist.net/trk.js');
   expect(source).toMatch(/<script async[^>]* src="https:\/\/trk\.srvkist\.net\/trk\.js"/);
   expect(source).not.toContain('recorder.js');
+  expect(source).not.toContain('visibility: hidden');
+  expect(source).not.toContain('onload');
+  expect(source).toContain('<main class="main is-loading">');
+  expect(source).toContain('<noscript>');
   expect(source).not.toContain('<!--');
   for (const link of links) {
     expect(source).toContain(`href="${link.href.replaceAll('&', '&amp;')}"`);

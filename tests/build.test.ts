@@ -18,6 +18,8 @@ it('builds the site without shipping adjacent tests or the test runner', async (
   expect(source).toContain('content="https://simbo.de/"');
   expect(source).toContain('content="https://simbo.de/screenshot.png"');
   expect(source).toContain('https://trk.srvkist.net/trk.js');
+  expect(source).toMatch(/<script async[^>]* src="https:\/\/trk\.srvkist\.net\/trk\.js"/);
+  expect(source).not.toContain('recorder.js');
   expect(source).not.toContain('<!--');
   for (const link of links) {
     expect(source).toContain(`href="${link.href.replaceAll('&', '&amp;')}"`);
